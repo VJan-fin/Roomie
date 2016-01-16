@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RentalUnit;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,7 @@ class RentalUnitController extends Controller
      */
     public function index()
     {
-        //
+        return RentalUnit::all();
     }
 
     /**
@@ -46,9 +47,9 @@ class RentalUnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RentalUnit $rentalUnit)
     {
-        //
+        return $rentalUnit;
     }
 
     /**
@@ -57,7 +58,7 @@ class RentalUnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RentalUnit $rentalUnit)
     {
         //
     }
@@ -69,7 +70,7 @@ class RentalUnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RentalUnit $rentalUnit)
     {
         //
     }
@@ -80,7 +81,7 @@ class RentalUnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RentalUnit $rentalUnit)
     {
         //
     }

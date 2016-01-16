@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\RentalUnit;
+use App\Comment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,9 +16,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RentalUnit $rentalUnit)
     {
-        //
+        return $rentalUnit->comments;
     }
 
     /**
@@ -24,7 +26,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(RentalUnit $rentalUnit)
     {
         //
     }
@@ -35,7 +37,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, RentalUnit $rentalUnit)
     {
         //
     }
@@ -46,9 +48,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RentalUnit $rentalUnit, Comment $comment)
     {
-        //
+        return $rentalUnit->comments()->where("id", $comment->getAttribute("id"))->get();
     }
 
     /**
@@ -57,7 +59,7 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RentalUnit $rentalUnit, Comment $comment)
     {
         //
     }
@@ -69,7 +71,7 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RentalUnit $rentalUnit, Comment $comment)
     {
         //
     }
@@ -80,7 +82,7 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RentalUnit $rentalUnit, Comment $comment)
     {
         //
     }

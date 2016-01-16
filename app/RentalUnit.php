@@ -50,6 +50,6 @@ class RentalUnit extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Comments', 'on_rental');
+        return $this->hasMany('App\Comment', 'on_rental');
     }
 }

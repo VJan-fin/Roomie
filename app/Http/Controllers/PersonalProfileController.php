@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PersonalProfile;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,7 @@ class PersonalProfileController extends Controller
      */
     public function index()
     {
-        //
+        return PersonalProfile::all();
     }
 
     /**
@@ -46,9 +47,9 @@ class PersonalProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PersonalProfile $profile)
     {
-        //
+        return $profile;
     }
 
     /**
@@ -57,7 +58,7 @@ class PersonalProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PersonalProfile $profile)
     {
         //
     }
@@ -69,7 +70,7 @@ class PersonalProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PersonalProfile $profile)
     {
         //
     }
@@ -80,7 +81,7 @@ class PersonalProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PersonalProfile $profile)
     {
         //
     }

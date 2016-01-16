@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RoommateProfile;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,7 @@ class RoommateProfileController extends Controller
      */
     public function index()
     {
-        //
+        return RoommateProfile::all();
     }
 
     /**
@@ -46,9 +47,9 @@ class RoommateProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RoommateProfile $profile)
     {
-        //
+        return $profile;
     }
 
     /**
@@ -57,7 +58,7 @@ class RoommateProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RoommateProfile $profile)
     {
         //
     }
@@ -69,7 +70,7 @@ class RoommateProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RoommateProfile $profile)
     {
         //
     }
@@ -80,7 +81,7 @@ class RoommateProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RoommateProfile $profile)
     {
         //
     }
