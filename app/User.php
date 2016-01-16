@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -28,7 +29,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'roles'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,4 +37,26 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    public function personalProfile()
+    {
+        return $this->hasOne('App\PersonalProfile', 'for_user');
+    }
+
+    public function roommateProfile()
+    {
+        return $this->hasOne('App\RoommateProfile', 'for_user');
+    }
+
+    public function rentalUnit()
+    {
+        return $this->hasMany('App\RentalUnit');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        $time = Carbon::createFromTimestamp(strtotime($value));
+        return $time->format('M d,Y \a\t H:i');
+    }
 }
