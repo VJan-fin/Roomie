@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/hello', function () {
@@ -35,9 +35,9 @@ Route::group(array('prefix' => 'api'), function() {
     Route::resource('RentalUnit.Comment', 'CommentController');
 });
 
-// CATCH ALL ROUTE ============================= 
+// CATCH ALL ROUTE =============================
 // all routes that are not home or api will be redirected to the frontend
 Route::any('{path?}', function()
 {
-    return view("welcome");
+    return view("home");
 })->where("path", ".+");
