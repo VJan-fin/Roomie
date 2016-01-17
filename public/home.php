@@ -52,10 +52,26 @@
     </div>
 </nav>
 
+<div ng-controller="RentalUnitController">
+    <div class="form-group">
+        <button class="btn btn-primary btn-lg" ng-click="getAllRentalUnits()">Get All</button>
+        <button class="btn btn-primary btn-lg" ng-click="getSingleRentalUnit()">Get Only One</button>
+    </div>
+
+    <!-- LOADING ICON =============================================== -->
+    <!-- show loading icon if the loading variable is set to true -->
+    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-4x fa-spin"></span></p>
+
+    <div class="rentalUnits" ng-hide="loading" ng-repeat="unit in rentalUnits">
+        <h3>Rental Unit #{{ unit.id }} <small>by {{ unit.user_id }}</h3>
+        <p>{{ unit.address }}</p>
+    </div>
+
+</div>
 
 
     <!-- Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
@@ -68,8 +84,15 @@
     <script src="app/libraries/angular-sanitize.min.js"></script>
     <script src="app/libraries/angular-touch.min.js"></script>
 
+
     <!-- Custom scripts -->
     <script src="app/app.js"></script>
+
+    <!-- Services -->
+    <script src="app/services/RentalUnitService.js"></script>
+    <!-- Controllers -->
+    <script src="app/controllers/RentalUnitController.js"></script>
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

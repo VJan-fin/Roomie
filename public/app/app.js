@@ -1,6 +1,6 @@
 var roomie = angular.module('roomie-app', [
- /* 'ui.router',
-  'ngResource',
+  'ngResource'
+  /*'ui.router',
   'pascalprecht.translate',
   'smart-table',
   'mgcrea.ngStrap',
