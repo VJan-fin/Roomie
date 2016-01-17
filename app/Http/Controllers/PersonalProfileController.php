@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class PersonalProfileController extends Controller
 {
@@ -17,7 +18,7 @@ class PersonalProfileController extends Controller
      */
     public function index()
     {
-        return PersonalProfile::all();
+        return Response::json(PersonalProfile::all());
     }
 
     /**
@@ -49,7 +50,7 @@ class PersonalProfileController extends Controller
      */
     public function show(PersonalProfile $profile)
     {
-        return $profile;
+        return Response::json($profile);
     }
 
     /**

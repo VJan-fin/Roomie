@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return Response::json(User::all());
     }
 
     /**
@@ -49,7 +50,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return Response::json($user);
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class RoommateProfileController extends Controller
 {
@@ -17,7 +18,7 @@ class RoommateProfileController extends Controller
      */
     public function index()
     {
-        return RoommateProfile::all();
+        return Response::json(RoommateProfile::all());
     }
 
     /**
@@ -49,7 +50,7 @@ class RoommateProfileController extends Controller
      */
     public function show(RoommateProfile $profile)
     {
-        return $profile;
+        return Response::json($profile);
     }
 
     /**

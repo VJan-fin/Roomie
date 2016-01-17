@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class RentalUnitController extends Controller
 {
@@ -17,7 +18,7 @@ class RentalUnitController extends Controller
      */
     public function index()
     {
-        return RentalUnit::all();
+        return Response::json(RentalUnit::all());
     }
 
     /**
@@ -49,7 +50,7 @@ class RentalUnitController extends Controller
      */
     public function show(RentalUnit $rentalUnit)
     {
-        return $rentalUnit;
+        return Response::json($rentalUnit);
     }
 
     /**

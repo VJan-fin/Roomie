@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class CommentController extends Controller
 {
@@ -18,7 +19,7 @@ class CommentController extends Controller
      */
     public function index(RentalUnit $rentalUnit)
     {
-        return $rentalUnit->comments;
+        return Response::json($rentalUnit->comments);
     }
 
     /**
@@ -50,7 +51,7 @@ class CommentController extends Controller
      */
     public function show(RentalUnit $rentalUnit, Comment $comment)
     {
-        return $rentalUnit->comments()->where("id", $comment->getAttribute("id"))->get();
+        return Response::json($rentalUnit->comments()->where("id", $comment->getAttribute("id"))->get());
     }
 
     /**

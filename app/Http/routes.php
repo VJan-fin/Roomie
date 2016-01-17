@@ -25,9 +25,19 @@ Route::model('RoommateProfile', 'App\RoommateProfile');
 Route::model('RentalUnit', 'App\RentalUnit');
 Route::model('Comment', 'App\Comment');
 
-Route::resource('User', 'UserController');
-Route::resource('PersonalProfile', 'PersonalProfileController');
-Route::resource('RoommateProfile', 'RoommateProfileController');
-Route::resource('RentalUnit', 'RentalUnitController');
-Route::resource('RentalUnit.Comment', 'CommentController');
+// API ROUTES ==================================
+// TODO: Enable only the necessary API functions. Create and edit are not needed since Angular handlees the views
+Route::group(array('prefix' => 'api'), function() {
+    Route::resource('User', 'UserController');
+    Route::resource('PersonalProfile', 'PersonalProfileController');
+    Route::resource('RoommateProfile', 'RoommateProfileController');
+    Route::resource('RentalUnit', 'RentalUnitController');
+    Route::resource('RentalUnit.Comment', 'CommentController');
+});
 
+// CATCH ALL ROUTE ============================= 
+// all routes that are not home or api will be redirected to the frontend
+Route::any('{path?}', function()
+{
+    return view("welcome");
+})->where("path", ".+");
