@@ -26,6 +26,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha256-AbCXzDgd7Vj/2JrsXgjrLdYZ92AgN262cXvQr4tAQa4= sha512-cA2CLCEXBR7hnXGgSNa+TaQ7WT2zW1IVm6uCLcu3ebHNhy+VIudw9kwgHlcL57wCiiXLZ1x7yT5Mv3QkDO2XZA==" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!--    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />-->
+    <link href='css/loading-bar.css' rel='stylesheet' type='text/css' media='all'>
 
     <!-- Custom CSS -->
     <link href="css/main.css">
@@ -47,7 +49,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="#/auth"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>
 </nav>
@@ -69,20 +71,30 @@
 
 </div>
 
+<!-- Angular routing -->
+<div ui-view></div>
+
 
     <!-- Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+<!--    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script> -->
 
-<!--    <script src="app/libraries/angular.min.js"></script>-->
+    <script src="app/libraries/angular.js"></script>
+    <script src="app/libraries/angular-ui-router.min.js"></script>
+    <script src="app/libraries/angular-sanitize.min.js"></script>
     <script src="app/libraries/angular-animate.min.js"></script>
     <script src="app/libraries/angular-loader.min.js"></script>
     <script src="app/libraries/angular-resource.min.js"></script>
     <script src="app/libraries/angular-route.min.js"></script>
-    <script src="app/libraries/angular-sanitize.min.js"></script>
     <script src="app/libraries/angular-touch.min.js"></script>
+    <script src="app/libraries/loading-bar.js"></script>
+
+    <!--[if lte IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
+    <![endif]-->
+    <script src="//cdn.jsdelivr.net/satellizer/0.13.4/satellizer.min.js"></script>
 
 
     <!-- Custom scripts -->
@@ -92,6 +104,7 @@
     <script src="app/services/RentalUnitService.js"></script>
     <!-- Controllers -->
     <script src="app/controllers/RentalUnitController.js"></script>
+    <script src="app/controllers/AuthController.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

@@ -10,6 +10,12 @@ roomie.controller('RentalUnitController',
             $scope.rentalUnits = {};
             $scope.rentalUnitId = 2;
 
+            //$http({
+            //    url: 'api/authenticate',
+            //    method: "POST",
+            //    data: {email: 'vikjan94@gmail.com', password: 'secret'}
+            //});
+
             $scope.getAllRentalUnits = function() {
                 $scope.loading = true;
 

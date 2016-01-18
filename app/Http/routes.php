@@ -28,6 +28,8 @@ Route::model('Comment', 'App\Comment');
 // API ROUTES ==================================
 // TODO: Enable only the necessary API functions. Create and edit are not needed since Angular handlees the views
 Route::group(array('prefix' => 'api'), function() {
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::resource('User', 'UserController');
     Route::resource('PersonalProfile', 'PersonalProfileController');
     Route::resource('RoommateProfile', 'RoommateProfileController');
