@@ -1,2 +1,18 @@
-<h1>USERS</h1>
-<h4>Successful login</h4>
+<h1>Rental Units</h1>
+
+<div ng-controller="RentalUnitController">
+    <div class="form-group">
+        <button class="btn btn-primary btn-lg" ng-click="getAllRentalUnits()">Get All</button>
+        <button class="btn btn-primary btn-lg" ng-click="getSingleRentalUnit()">Get Only One</button>
+    </div>
+
+    <!-- LOADING ICON =============================================== -->
+    <!-- show loading icon if the loading variable is set to true -->
+    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-4x fa-spin"></span></p>
+
+    <div class="rentalUnits" ng-hide="loading" ng-repeat="unit in rentalUnits">
+        <h3>Rental Unit #{{ unit.id }} <small>by {{ unit.user_id }}</small></h3>
+        <p>{{ unit.address }}</p>
+    </div>
+
+</div>

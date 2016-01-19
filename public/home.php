@@ -39,37 +39,31 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
+            <a class="navbar-brand" href="#/home">WebSiteName</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="#/home">Home</a></li>
             <li><a href="#">Page 1</a></li>
             <li><a href="#">Page 2</a></li>
             <li><a href="#">Page 3</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+
+        <ul ng-controller="AuthController" ng-if="authenticated" class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, {{currentUser.name}}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">My Profile</a></li>
+                    <li ng-click="logout()"><a href>Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul ng-if="!authenticated" class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="#/auth"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>
 </nav>
-
-<div ng-controller="RentalUnitController">
-    <div class="form-group">
-        <button class="btn btn-primary btn-lg" ng-click="getAllRentalUnits()">Get All</button>
-        <button class="btn btn-primary btn-lg" ng-click="getSingleRentalUnit()">Get Only One</button>
-    </div>
-
-    <!-- LOADING ICON =============================================== -->
-    <!-- show loading icon if the loading variable is set to true -->
-    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-4x fa-spin"></span></p>
-
-    <div class="rentalUnits" ng-hide="loading" ng-repeat="unit in rentalUnits">
-        <h3>Rental Unit #{{ unit.id }} <small>by {{ unit.user_id }}</h3>
-        <p>{{ unit.address }}</p>
-    </div>
-
-</div>
 
 <!-- Angular routing -->
 <div ui-view></div>

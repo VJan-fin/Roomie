@@ -30,6 +30,7 @@ Route::model('Comment', 'App\Comment');
 Route::group(array('prefix' => 'api'), function() {
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
     Route::resource('User', 'UserController');
     Route::resource('PersonalProfile', 'PersonalProfileController');
     Route::resource('RoommateProfile', 'RoommateProfileController');

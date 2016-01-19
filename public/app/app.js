@@ -24,6 +24,11 @@ roomie.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 roomie.config(function($stateProvider) {
 
     $stateProvider
+        .state('home', {
+            url: '/home',
+            templateUrl: 'views/homeView.html'
+            //controller: 'AuthController as auth'
+        })
         .state('auth', {
             url: '/auth',
             templateUrl: 'views/authView.html',
@@ -91,4 +96,34 @@ roomie.config(function($urlRouterProvider, $authProvider) {
         authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate',
     });
     */
+});
+
+
+roomie.run(function($rootScope, $state) {
+
+    // $stateChangeStart is fired whenever the state changes. We can use some parameters
+    // such as toState to hook into details about the state as it is changing
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
+
+        // Grab the user from local storage and parse it to an object
+        var user = JSON.parse(localStorage.getItem('user'));
+
+        if(user) {
+            $rootScope.authenticated = true;
+            $rootScope.currentUser = user;
+
+            if(toState.name === "auth") {
+
+                // Preventing the default behavior allows us to use $state.go
+                // to change states
+                event.preventDefault();
+
+                // go to the "main" state which in our case is users
+                $state.go('users');
+            }
+        }
+
+
+    });
+
 });
