@@ -52,7 +52,7 @@
             <li class="dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, {{currentUser.name}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#/personalProfile">My Profile</a></li>
                     <li ng-click="logout()"><a href>Logout</a></li>
                 </ul>
             </li>
@@ -96,9 +96,11 @@
 
     <!-- Services -->
     <script src="app/services/RentalUnitService.js"></script>
+    <script src="app/services/ProfileService.js"></script>
     <!-- Controllers -->
     <script src="app/controllers/RentalUnitController.js"></script>
     <script src="app/controllers/AuthController.js"></script>
+    <script src="app/controllers/PersonalProfileController.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
