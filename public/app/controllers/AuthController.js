@@ -59,8 +59,6 @@ roomie.controller('AuthController',
             // A logout handling method
             $scope.logout = function() {
 
-                console.log("User is deleted");
-
                 $auth.logout().then(function() {
 
                     // Remove the authenticated user from local storage

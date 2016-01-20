@@ -1,8 +1,8 @@
 /**
- * Created by Viktor on 19.01.2016.
+ * Created by Viktor on 20.01.2016.
  */
 
-roomie.controller('PersonalProfileController',
+roomie.controller('RoommateProfileController',
     ['$scope', '$http', '$rootScope', '$filter', 'ProfileService',
 
         function($scope, $http, $rootScope, $filter, ProfileService)
@@ -14,16 +14,6 @@ roomie.controller('PersonalProfileController',
                 {value: 'Female', text: 'Female'}
             ];
 
-            /**
-             * Necessary to properly show the editable select drop-down
-             */
-            $scope.showGender = function(profile) {
-                var selected = [];
-                if(profile.gender) {
-                    selected = $filter('filter')($scope.sexes, {value: profile.gender});
-                }
-                return selected.length ? selected[0].text : 'Not set';
-            };
 
             $scope.init = function() {
                 $scope.getMyProfile();

@@ -3,7 +3,9 @@ var roomie = angular.module('roomie-app', [
     'ngResource',
     'ngAnimate',
     'angular-loading-bar',
-    'satellizer'
+    'satellizer',
+    'xeditable',
+    'angularMoment'
 
 
 
@@ -103,11 +105,13 @@ roomie.config(function($urlRouterProvider, $authProvider) {
 });
 
 
-roomie.run(function($rootScope, $state) {
+roomie.run(function($rootScope, $state, editableOptions) {
 
     // $stateChangeStart is fired whenever the state changes. We can use some parameters
     // such as toState to hook into details about the state as it is changing
     $rootScope.$on('$stateChangeStart', function(event, toState) {
+
+        editableOptions.theme = 'bs3'; // bootstrap3 theme
 
         // Grab the user from local storage and parse it to an object
         var user = JSON.parse(localStorage.getItem('user'));

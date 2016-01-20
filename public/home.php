@@ -28,6 +28,8 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <!--    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />-->
     <link href='css/loading-bar.css' rel='stylesheet' type='text/css' media='all'>
+<!--    <link href="css/xeditable.css" rel='stylesheet' type='text/css'>-->
+    <link href="css/flaticon.css" rel='stylesheet'>
 
     <!-- Custom CSS -->
     <link href="css/main.css">
@@ -50,7 +52,7 @@
 
         <ul ng-controller="AuthController" ng-if="authenticated" class="nav navbar-nav navbar-right">
             <li class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, {{currentUser.name}}<span class="caret"></span></a>
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user fa-lg fa-fw"></i>Welcome, {{currentUser.name}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#/personalProfile">My Profile</a></li>
                     <li ng-click="logout()"><a href>Logout</a></li>
@@ -75,6 +77,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
 <!--    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script> -->
 
+
     <script src="app/libraries/angular.js"></script>
     <script src="app/libraries/angular-ui-router.min.js"></script>
     <script src="app/libraries/angular-sanitize.min.js"></script>
@@ -84,6 +87,12 @@
     <script src="app/libraries/angular-route.min.js"></script>
     <script src="app/libraries/angular-touch.min.js"></script>
     <script src="app/libraries/loading-bar.js"></script>
+    <script src="app/libraries/xeditable.js"></script>
+
+    <!-- load momentJS (required for angular-moment) -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <!-- load angular-moment -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
 
     <!--[if lte IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
