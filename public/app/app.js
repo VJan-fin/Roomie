@@ -7,7 +7,6 @@ var roomie = angular.module('roomie-app', [
     'xeditable',
     'angularMoment',
     'ui.bootstrap',
-    'ui-rangeSlider'
 
 
 
@@ -42,7 +41,8 @@ roomie.config(function($stateProvider) {
         .state('personalProfile', {
             url: '/personalProfile',
             //templateUrl: 'views/personalProfileView.html'
-            templateUrl: 'views/roommateProfileView.html'
+            //templateUrl: 'views/roommateProfileView.html'
+            templateUrl: 'views/profileView.html'
         })
         .state('users', {
             url: '/users',
