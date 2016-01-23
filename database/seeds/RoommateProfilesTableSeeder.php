@@ -21,7 +21,7 @@ class RoommateProfilesTableSeeder extends Seeder
                 'monthly_budget_lower_limit' => 850, 'monthly_budget_upper_limit' => 1100,
                 'move_in_from' => Carbon::createFromFormat('d/m/Y', '01/05/2016'),
                 'lease_length' => 12,
-                'looking_for' => 'Roommate with an appartment',
+                'looking_for' => 'Roommate with an apartment',
                 'exercise' => '', 'hobbies' => '',
                 'created_at' => Carbon::create(2016, 1, 10, 11, 54, 21, "Europe/Skopje"), 'updated_at' => Carbon::create(2016, 1, 10, 11, 54, 21, "Europe/Skopje")],
 
@@ -31,7 +31,7 @@ class RoommateProfilesTableSeeder extends Seeder
                 'monthly_budget_lower_limit' => 1200, 'monthly_budget_upper_limit' => 1350,
                 'move_in_from' => Carbon::createFromDate(2016, 3, 1, 'Europe/Skopje'),
                 'lease_length' => 1,
-                'looking_for' => 'Roommate with an appartment',
+                'looking_for' => 'Roommate with an apartment',
                 'exercise' => '', 'hobbies' => '',
                 'created_at' => Carbon::create(2016, 1, 12, 17, 32, 4, "Europe/Skopje"), 'updated_at' => Carbon::create(2016, 1, 12, 17, 32, 4, "Europe/Skopje")],
 

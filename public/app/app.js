@@ -5,11 +5,14 @@ var roomie = angular.module('roomie-app', [
     'angular-loading-bar',
     'satellizer',
     'xeditable',
-    'angularMoment'
+    'angularMoment',
+    'ui.bootstrap',
+    'ui-rangeSlider'
 
 
 
-  /*'ui.router',
+  /* 'ui-rangeSlider',
+  'ui.router',
   'pascalprecht.translate',
   'smart-table',
   'mgcrea.ngStrap',
@@ -38,7 +41,8 @@ roomie.config(function($stateProvider) {
         })
         .state('personalProfile', {
             url: '/personalProfile',
-            templateUrl: 'views/personalProfileView.html'
+            //templateUrl: 'views/personalProfileView.html'
+            templateUrl: 'views/roommateProfileView.html'
         })
         .state('users', {
             url: '/users',
@@ -107,11 +111,11 @@ roomie.config(function($urlRouterProvider, $authProvider) {
 
 roomie.run(function($rootScope, $state, editableOptions) {
 
+    editableOptions.theme = 'bs3'; // bootstrap3 theme
+
     // $stateChangeStart is fired whenever the state changes. We can use some parameters
     // such as toState to hook into details about the state as it is changing
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-
-        editableOptions.theme = 'bs3'; // bootstrap3 theme
 
         // Grab the user from local storage and parse it to an object
         var user = JSON.parse(localStorage.getItem('user'));

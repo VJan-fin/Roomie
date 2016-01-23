@@ -32,7 +32,7 @@ class CreateRoommateProfilesTable extends Migration
             $table->integer('monthly_budget_upper_limit');
             $table->date('move_in_from');
             $table->integer('lease_length');
-            $table->enum('looking_for', ['Just a roommate', 'Roommate with an appartment', 'Just a room', 'Anything'])->default('Anything');
+            $table->enum('looking_for', ['Just a roommate', 'Roommate with an apartment', 'Just a room', 'Anything'])->default('Anything');
 
             $table->string('exercise')->nullable();
             $table->string('hobbies', 500)->nullable();

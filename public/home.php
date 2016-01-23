@@ -30,9 +30,11 @@
     <link href='css/loading-bar.css' rel='stylesheet' type='text/css' media='all'>
 <!--    <link href="css/xeditable.css" rel='stylesheet' type='text/css'>-->
     <link href="css/flaticon.css" rel='stylesheet'>
+    <link href="css/angular.rangeSlider.css">
 
     <!-- Custom CSS -->
-    <link href="css/main.css">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/customSlider.css" rel="stylesheet">
 
 </head>
 
@@ -87,7 +89,12 @@
     <script src="app/libraries/angular-route.min.js"></script>
     <script src="app/libraries/angular-touch.min.js"></script>
     <script src="app/libraries/loading-bar.js"></script>
+    <!-- Load Angular-UI -->
+    <script src="app/libraries/ui-bootstrap-1.1.0.min.js"></script>
+    <script src="app/libraries/ui-bootstrap-tpls-1.1.0.min.js"></script>
+    <!-- Editable form elements -->
     <script src="app/libraries/xeditable.js"></script>
+    <script src="app/libraries/angular.rangeSlider.js"></script>
 
     <!-- load momentJS (required for angular-moment) -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
@@ -110,6 +117,7 @@
     <script src="app/controllers/RentalUnitController.js"></script>
     <script src="app/controllers/AuthController.js"></script>
     <script src="app/controllers/PersonalProfileController.js"></script>
+    <script src="app/controllers/RoommateProfileController.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

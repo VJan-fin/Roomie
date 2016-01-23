@@ -14,6 +14,13 @@ roomie.controller('PersonalProfileController',
                 {value: 'Female', text: 'Female'}
             ];
 
+            $scope.statuses = [
+                {value: 'Single', text: 'Single'},
+                {value: 'Dating', text: 'Dating'},
+                {value: 'In a Relationship', text: 'In a Relationship'},
+                {value: 'Married', text: 'Married'}
+            ];
+
             /**
              * Necessary to properly show the editable select drop-down
              */
@@ -24,6 +31,18 @@ roomie.controller('PersonalProfileController',
                 }
                 return selected.length ? selected[0].text : 'Not set';
             };
+
+            /**
+             * Necessary to properly show the editable select drop-down
+             */
+            $scope.showStatus = function(profile) {
+                var selected = [];
+                if(profile.relationship_status) {
+                    selected = $filter('filter')($scope.statuses, {value: profile.relationship_status});
+                }
+                return selected.length ? selected[0].text : 'Not set';
+            };
+
 
             $scope.init = function() {
                 $scope.getMyProfile();
@@ -46,6 +65,10 @@ roomie.controller('PersonalProfileController',
                 })
             };
 
+            /**
+             * Getting the profiles of the logged in user
+             * as soon as the page is loaded
+             */
             $scope.init();
 
         }

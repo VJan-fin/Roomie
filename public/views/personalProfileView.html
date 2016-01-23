@@ -82,18 +82,18 @@
                                 <i class="flaticon-heart288"></i>
                                 <!-- editable field -->
                                 <label for="relationship_status" class="title">Relationship status: </label>
-                                <span id="relationship_status" editable-text="profile.relationship_status" ng-show="!profileForm.$visible" e-name="relationship_status">{{ profile.relationship_status || '--unknown--' }}</span>
+                                <span id="relationship_status" editable-select="profile.relationship_status" ng-show="!profileForm.$visible" e-name="relationship_status" e-ng-options="s.value as s.text for s in statuses">{{ showStatus(profile) }}</span>
                             </div>
                         </div>
 
                         <div class="panel-footer" style="margin-top: 20px;">
                             <div class="row">
                                 <div class="col-sm-2">More about me!</div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <!-- editable field -->
                                     <span id="description" editable-textarea="profile.description" e-rows="7" e-cols="40" ng-show="!profileForm.$visible" e-name="description">{{ profile.description || '--unknown--' }}</span>
                                 </div>
-                                <div class="col-sm-2"></div>
+                                <div class="col-sm-3"></div>
                             </div>
                         </div>
 
@@ -113,4 +113,5 @@
             </div>
         </form>
     </div>
+
 </div>
