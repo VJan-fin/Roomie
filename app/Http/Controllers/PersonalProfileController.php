@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\PersonalProfile;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Request;
 
 class PersonalProfileController extends Controller
 {
@@ -17,7 +19,7 @@ class PersonalProfileController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+//        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -82,7 +84,10 @@ class PersonalProfileController extends Controller
      */
     public function update(Request $request, PersonalProfile $profile)
     {
-        //
+        //Use fill() to automatically fill in the fields
+        $profile->fill(Input::all());
+        $profile->save();
+        return Response::json($profile);
     }
 
     /**

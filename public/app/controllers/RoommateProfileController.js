@@ -19,15 +19,6 @@ roomie.controller('RoommateProfileController',
                 $scope.datePicker.isOpen = true;
             };
 
-            //$scope.disabled = function(date, mode) {
-            //    return ( mode === 'day' && ( date.getDay() < new Date() ) );
-            //};
-
-            //$scope.toggleMin = function() {
-            //    $scope.minDate = $scope.minDate ? null : new Date();
-            //};
-            //$scope.toggleMin();
-
             $scope.goals = [
                 {value: 'Just a roommate', text: 'Just a roommate'},
                 {value: 'Roommate with an apartment', text: 'Roommate with an apartment'},
@@ -62,6 +53,23 @@ roomie.controller('RoommateProfileController',
                     $scope.loading = false;
                     $scope.profile = data;
                     $scope.profile.move_in_from = new Date($scope.profile.move_in_from);
+                    console.log(data);
+                }).error(function (data) {
+                    console.log(data);
+                    $scope.loading = false;
+                })
+            };
+
+            $scope.saveMyProfile = function() {
+
+                if(!$rootScope.currentUser)
+                    return;
+
+                $scope.loading = true;
+
+                ProfileService.saveMyRoommateProfile($scope.profile).success(function (data) {
+                    $scope.loading = false;
+                    $scope.profile = data;
                     console.log(data);
                 }).error(function (data) {
                     console.log(data);

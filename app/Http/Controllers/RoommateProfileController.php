@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\RoommateProfile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 class RoommateProfileController extends Controller
@@ -16,7 +18,7 @@ class RoommateProfileController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+//        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -81,7 +83,12 @@ class RoommateProfileController extends Controller
      */
     public function update(Request $request, RoommateProfile $profile)
     {
-        //
+        //Use fill() to automatically fill in the fields
+        $profile->fill(Input::all());
+//        $carbon = Carbon::createFromTimestamp(strtotime(Input::get('move_in_from')));
+//        $profile->move_in_from = $carbon->format('d/m/Y');
+        $profile->save();
+        return Response::json($profile);
     }
 
     /**

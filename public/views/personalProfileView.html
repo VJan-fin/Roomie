@@ -7,7 +7,7 @@
 
     <!-- PERSONAL PROFILE INFORMATION -->
     <div class="panel-group" style="margin-top: 40px">
-        <form editable-form name="profileForm">
+        <form editable-form name="profileForm" onaftersave="saveMyProfile()">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="display: inline-block">Personal Information</h4>
@@ -28,7 +28,7 @@
                                 <i class="flaticon-user168"></i>
                                 <!-- editable field -->
                                 <label for="first_name" class="title">First name: </label>
-                                <span id="first_name" editable-text="profile.first_name" ng-show="!profileForm.$visible" e-name="first_name">{{ profile.first_name || '--unknown--' }}</span>
+                                <span id="first_name" editable-text="profile.first_name" onbeforesave="checkName($data)" ng-show="!profileForm.$visible" e-name="first_name">{{ profile.first_name || '--unknown--' }}</span>
                             </div>
                             <div class="col-sm-4">
                                 <i class="flaticon-college1"></i>

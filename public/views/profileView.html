@@ -1,6 +1,9 @@
 
 <!-- PERSONAL PROFILE INFORMATION -->
 <div class="container" ng-controller="PersonalProfileController">
+    <img ng-src="images/default-male.png" ng-show="profile.gender == 'Male'" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="100" height="100">
+    <img ng-src="images/default-female.png" ng-show="profile.gender == 'Female'" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="304" height="236">
+
     <h3>
         Meet {{currentUser.name}} <br />
         <small>Joined Roomie <time am-time-ago="profile.created_at" title="{{ profile.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
@@ -9,7 +12,7 @@
 
     <!-- PERSONAL PROFILE INFORMATION -->
     <div class="panel-group" style="margin-top: 40px">
-        <form editable-form name="profileForm">
+        <form editable-form name="profileForm" onaftersave="saveMyProfile()">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="display: inline-block">Personal Information</h4>
@@ -30,7 +33,7 @@
                             <i class="flaticon-user168"></i>
                             <!-- editable field -->
                             <label for="first_name" class="title">First name: </label>
-                            <span id="first_name" editable-text="profile.first_name" ng-show="!profileForm.$visible" e-name="first_name">{{ profile.first_name || '--unknown--' }}</span>
+                            <span id="first_name" editable-text="profile.first_name" ng-show="!profileForm.$visible" e-name="first_name" e-required>{{ profile.first_name || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-college1"></i>
@@ -51,7 +54,7 @@
                             <i class="flaticon-user168"></i>
                             <!-- editable field -->
                             <label for="last_name" class="title">Last name: </label>
-                            <span id="last_name" editable-text="profile.last_name" ng-show="!profileForm.$visible" e-name="last_name">{{ profile.last_name || '--unknown--' }}</span>
+                            <span id="last_name" editable-text="profile.last_name" ng-show="!profileForm.$visible" e-name="last_name" e-required>{{ profile.last_name || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-career1"></i>
@@ -72,7 +75,7 @@
                             <i class="flaticon-united8"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="gender" class="title">Gender: </label>
-                            <span id="gender" editable-select="profile.gender" ng-show="!profileForm.$visible" e-name="gender" e-ng-options="s.value as s.text for s in sexes">{{ showGender(profile) }}</span>
+                            <span id="gender" editable-select="profile.gender" ng-show="!profileForm.$visible" e-name="gender" e-ng-options="s.value as s.text for s in sexes" e-required>{{ showGender(profile) }}</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-archive135"></i>
@@ -84,7 +87,7 @@
                             <i class="flaticon-heart288"></i>
                             <!-- editable field -->
                             <label for="relationship_status" class="title">Relationship status: </label>
-                            <span id="relationship_status" editable-select="profile.relationship_status" ng-show="!profileForm.$visible" e-name="relationship_status" e-ng-options="s.value as s.text for s in statuses">{{ showStatus(profile) }}</span>
+                            <span id="relationship_status" editable-select="profile.relationship_status" ng-show="!profileForm.$visible" e-name="relationship_status" e-ng-options="s.value as s.text for s in statuses" e-required>{{ showStatus(profile) }}</span>
                         </div>
                     </div>
 
@@ -124,7 +127,7 @@
 
     <!-- ROOMMATE PROFILE INFORMATION -->
     <div class="panel-group" style="margin-top: 40px">
-        <form editable-form name="profileForm">
+        <form editable-form name="profileForm" onaftersave="saveMyProfile()">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="display: inline-block">Roommate Information</h4>
@@ -145,14 +148,14 @@
                             <i class="flaticon-magnifyingglass29"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="looking_for" class="title">Looking for: </label>
-                            <span id="looking_for" editable-select="profile.looking_for" ng-show="!profileForm.$visible" e-name="looking_for" e-ng-options="g.value as g.text for g in goals">{{ showGoal(profile) }}</span>
+                            <span id="looking_for" editable-select="profile.looking_for" ng-show="!profileForm.$visible" e-name="looking_for" e-ng-options="g.value as g.text for g in goals" e-required>{{ showGoal(profile) }}</span>
                         </div>
                         <div class="col-sm-2"></div>
                         <div class="col-sm-4">
                             <i class="flaticon-sign20"></i>
                             <!-- editable field -->
                             <label for="lease_length" class="title">Lease length (in months): </label>
-                            <span id="lease_length" editable-number="profile.lease_length" ng-show="!profileForm.$visible" e-name="lease_length" e-min="1">{{ profile.lease_length || '--unknown--' }}</span>
+                            <span id="lease_length" editable-number="profile.lease_length" ng-show="!profileForm.$visible" e-name="lease_length" e-min="1" e-required>{{ profile.lease_length || '--unknown--' }}</span>
                         </div>
                     </div>
 
@@ -167,7 +170,7 @@
                             <i class="flaticon-logistics3"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label>
-                            <span id="move_in_from" editable-bsdate="profile.move_in_from" e-uib-datepicker-popup="dd/MM/yyyy" ng-show="!profileForm.$visible" e-is-open="datePicker.isOpen" e-min-date="datePicker.minDate" >
+                            <span id="move_in_from" editable-bsdate="profile.move_in_from" e-uib-datepicker-popup="dd/MM/yyyy" ng-show="!profileForm.$visible" e-is-open="datePicker.isOpen" e-min-date="datePicker.minDate" e-required>
                                 {{ (profile.move_in_from | date:"dd MMMM yyyy") || 'empty' }}
                             </span>
                         </div>
@@ -182,11 +185,11 @@
                         <div class="col-sm-1"></div>
                         <div class="col-sm-2">
                             <label for="monthly_budget_lower_limit" class="title">From: </label>
-                            <span id="monthly_budget_lower_limit" editable-text="profile.monthly_budget_lower_limit" ng-show="!profileForm.$visible" e-name="monthly_budget_lower_limit">{{ profile.monthly_budget_lower_limit || '--unknown--' }}</span>
+                            <span id="monthly_budget_lower_limit" editable-text="profile.monthly_budget_lower_limit" ng-show="!profileForm.$visible" e-name="monthly_budget_lower_limit" e-required>{{ profile.monthly_budget_lower_limit || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-2">
                             <label for="monthly_budget_upper_limit" class="title">To: </label>
-                            <span id="monthly_budget_upper_limit" editable-text="profile.monthly_budget_upper_limit" ng-show="!profileForm.$visible" e-name="monthly_budget_upper_limit">{{ profile.monthly_budget_upper_limit || '--unknown--' }}</span>
+                            <span id="monthly_budget_upper_limit" editable-text="profile.monthly_budget_upper_limit" ng-show="!profileForm.$visible" e-name="monthly_budget_upper_limit" e-required>{{ profile.monthly_budget_upper_limit || '--unknown--' }}</span>
                         </div>
                     </div>
 

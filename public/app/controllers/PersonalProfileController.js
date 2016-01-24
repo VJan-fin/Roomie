@@ -65,6 +65,28 @@ roomie.controller('PersonalProfileController',
                 })
             };
 
+            $scope.checkName = function($data) {
+                console.log($data);
+            };
+
+            $scope.saveMyProfile = function() {
+
+                if(!$rootScope.currentUser)
+                    return;
+
+                $scope.loading = true;
+
+                ProfileService.saveMyPersonalProfile($scope.profile).success(function (data) {
+                    $scope.loading = false;
+                    $scope.profile = data;
+                    console.log(data);
+                }).error(function (data) {
+                    console.log(data);
+                    $scope.loading = false;
+                })
+            };
+
+
             /**
              * Getting the profiles of the logged in user
              * as soon as the page is loaded

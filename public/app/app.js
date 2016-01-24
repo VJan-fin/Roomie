@@ -6,7 +6,7 @@ var roomie = angular.module('roomie-app', [
     'satellizer',
     'xeditable',
     'angularMoment',
-    'ui.bootstrap',
+    'ui.bootstrap'
 
 
 
@@ -112,6 +112,7 @@ roomie.config(function($urlRouterProvider, $authProvider) {
 roomie.run(function($rootScope, $state, editableOptions) {
 
     editableOptions.theme = 'bs3'; // bootstrap3 theme
+    editableOptions.blur = 'submit';
 
     // $stateChangeStart is fired whenever the state changes. We can use some parameters
     // such as toState to hook into details about the state as it is changing
