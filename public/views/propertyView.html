@@ -1,0 +1,210 @@
+<!-- PROPERTY INFORMATION -->
+<div class="container" ng-controller="RentalUnitController">
+
+    <h3>
+        Property #{{property.id}} <br />
+        <small>Posted on Roomie <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+        </small>
+    </h3>
+
+    <!-- PROPERTY DETAILS-->
+    <div class="panel-group" style="margin-top: 40px">
+        <form editable-form name="propertyForm">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="display: inline-block">Property Details</h4>
+
+                    <span class="buttons" style="float: right; margin-right: 10px;">
+                        <!-- button to show form -->
+                        <button type="button" class="btn btn-default" ng-click="propertyForm.$show()" ng-show="!propertyForm.$visible">
+                            <i class="fa fa-pencil fw"></i>
+                            Edit
+                        </button>
+                    </span>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-home78"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="type" class="title">Property type: </label>
+                            <span id="type" editable-select="property.type" ng-show="!propertyForm.$visible" e-name="type" e-ng-options="t.value as t.text for t in types" e-required>{{ showType(property) }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-sign20"></i>
+                            <!-- editable field -->
+                            <label for="lease_length" class="title">Lease length (in months): </label>
+                            <span id="lease_length" editable-number="property.lease_length" ng-show="!propertyForm.$visible" e-name="lease_length" e-min="1" e-required>{{ property.lease_length || '--unknown--' }}</span>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-money132"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="rent" class="title">Monthly rent: </label>
+                            <span id="rent" editable-text="property.rent" ng-show="!propertyForm.$visible" e-name="rent" e-required>{{ property.rent || '--unknown--' }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-home78"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="class" class="title">Property class: </label>
+                            <span id="class" editable-select="property.class" ng-show="!propertyForm.$visible" e-name="class" e-ng-options="c.value as c.text for c in classes" e-required>{{ showClass(property) }}</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <i class="flaticon-logistics3"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label>
+                            <span id="move_in_from" editable-bsdate="property.move_in_from" e-uib-datepicker-popup="dd/MM/yyyy" ng-show="!propertyForm.$visible" e-is-open="datePicker.isOpen" e-min-date="datePicker.minDate" e-required>
+                                {{ (property.move_in_from | date:"dd MMMM yyyy") || 'empty' }}
+                            </span>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="button" class="btn btn-default" ng-show="propertyForm.$visible" ng-click="openPopUp()">
+                                <i class="fa fa-calendar fw"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-sign20"></i>
+                            <!-- editable field -->
+                            <label for="num_bedrooms" class="title">Number of bedrooms: </label>
+                            <span id="num_bedrooms" editable-number="property.num_bedrooms" ng-show="!propertyForm.$visible" e-name="num_bedrooms" e-min="0" e-required>{{ property.num_bedrooms || '--unknown--' }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-sign20"></i>
+                            <!-- editable field -->
+                            <label for="num_bathrooms" class="title">Number of bathrooms: </label>
+                            <span id="num_bathrooms" editable-number="property.num_bathrooms" ng-show="!propertyForm.$visible" e-name="num_bathrooms" e-min="0" e-required>{{ property.num_bathrooms || '--unknown--' }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-home78"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="furniture" class="title">Furniture: </label>
+                            <span id="furniture" editable-select="property.furniture" ng-show="!propertyForm.$visible" e-name="furniture" e-ng-options="f.value as f.text for f in furnished" e-required>{{ showFurniture(property) }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-user168"></i>
+                            <!-- editable field -->
+                            <label for="city" class="title">City: </label>
+                            <span id="city" editable-text="property.city" ng-show="!propertyForm.$visible" e-name="city" e-required>{{ property.city || '--unknown--' }}</span>
+                        </div>
+                        <div class="col-sm-8">
+                            <i class="flaticon-career1"></i>
+                            <!-- editable field -->
+                            <label for="address" class="title">Address: </label>
+                            <span id="address" editable-text="property.address" ng-show="!propertyForm.$visible" e-name="address" e-required>{{ property.address || '--unknown--' }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-footer" style="margin-top: 20px;">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.wifi"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.wifi"></i>
+                                <!-- editable checkbox -->
+                                <span id="wifi" editable-checkbox="property.wifi" e-ng-true-value="1" e-ng-false-value="0" e-title="">Wi-Fi</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.air_conditioning"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.air_conditioning"></i>
+                                <!-- editable checkbox -->
+                                <span id="air_conditioning" editable-checkbox="property.air_conditioning" e-ng-true-value="1" e-ng-false-value="0" e-title="">Air-conditioning</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.cable"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.cable"></i>
+                                <!-- editable checkbox -->
+                                <span id="cable" editable-checkbox="property.cable" e-ng-true-value="1" e-ng-false-value="0" e-title="">Cable TV</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.satellite"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.satellite"></i>
+                                <!-- editable checkbox -->
+                                <span id="satellite" editable-checkbox="property.satellite" e-ng-true-value="1" e-ng-false-value="0" e-title="">Satellite TV</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.elevator"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.elevator"></i>
+                                <!-- editable checkbox -->
+                                <span id="elevator" editable-checkbox="property.elevator" e-ng-true-value="1" e-ng-false-value="0" e-title="">Elevator</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.laundry"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.laundry"></i>
+                                <!-- editable checkbox -->
+                                <span id="laundry" editable-checkbox="property.laundry" e-ng-true-value="1" e-ng-false-value="0" e-title="">Laundry room</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.gym"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.gym"></i>
+                                <!-- editable checkbox -->
+                                <span id="gym" editable-checkbox="property.gym" e-ng-true-value="1" e-ng-false-value="0" e-title="">Gym</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.doorman"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.doorman"></i>
+                                <!-- editable checkbox -->
+                                <span id="doorman" editable-checkbox="property.doorman" e-ng-true-value="1" e-ng-false-value="0" e-title="">Doorman</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.pets"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.pets"></i>
+                                <!-- editable checkbox -->
+                                <span id="pets" editable-checkbox="property.pets" e-ng-true-value="1" e-ng-false-value="0" e-title="">Pets allowed</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="flaticon-circle108" ng-show="!propertyForm.$visible && property.private_bathroom"></i>
+                                <i class="flaticon-cross108" ng-show="!propertyForm.$visible && !property.private_bathroom"></i>
+                                <!-- editable checkbox -->
+                                <span id="private_bathroom" editable-checkbox="property.private_bathroom" e-ng-true-value="1" e-ng-false-value="0" e-title="">Private bathroom</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="propertyDescription" class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">Description:</div>
+                        <div id="description" class="col-sm-6">
+                            <!-- editable field -->
+                            <span editable-textarea="property.description" e-rows="7" e-cols="40" ng-show="!propertyForm.$visible" e-name="description">{{ property.description || '--unknown--' }}</span>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+
+
+                    <div class="buttons" style="margin-top: 20px;">
+                        <!-- buttons to submit / cancel form -->
+                            <span ng-show="propertyForm.$visible">
+                                <button type="submit" class="btn btn-primary" ng-disabled="propertyForm.$waiting">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-default" ng-disabled="propertyForm.$waiting" ng-click="propertyForm.$cancel()">
+                                    Cancel
+                                </button>
+                            </span>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

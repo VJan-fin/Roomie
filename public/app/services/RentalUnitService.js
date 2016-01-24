@@ -20,6 +20,16 @@ roomie.factory('RentalUnitService', function($http) {
                 url: 'api/RentalUnit/' + rental_unit,
                 method: "GET"
             });
+        },
+
+        saveProperty: function(rental_unit) {
+            return $http({
+                url: 'api/RentalUnit/' + rental_unit.id,
+                method: "PUT",
+                // Necessary to indicate that the sent data is JSON
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                data: $.param(rental_unit)
+            });
         }
 
     }

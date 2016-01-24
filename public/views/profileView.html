@@ -94,9 +94,9 @@
                     <div class="panel-footer" style="margin-top: 20px;">
                         <div class="row">
                             <div class="col-sm-2">More about me!</div>
-                            <div class="col-sm-7">
+                            <div id="description" class="col-sm-7">
                                 <!-- editable field -->
-                                <span id="description" editable-textarea="profile.description" e-rows="7" e-cols="40" ng-show="!profileForm.$visible" e-name="description">{{ profile.description || '--unknown--' }}</span>
+                                <span editable-textarea="profile.description" e-rows="7" e-cols="40" ng-show="!profileForm.$visible" e-name="description">{{ profile.description || '--unknown--' }}</span>
                             </div>
                             <div class="col-sm-3"></div>
                         </div>

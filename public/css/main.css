@@ -1,3 +1,7 @@
 output.ng-binding {
     color: white !important;
 }
+
+#description {
+    text-align: justify;
+}

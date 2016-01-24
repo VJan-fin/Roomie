@@ -42,6 +42,10 @@ roomie.config(function($stateProvider) {
             url: '/personalProfile',
             templateUrl: 'views/profileView.html'
         })
+        .state('propertyPage', {
+            url: '/propertyPage',
+            templateUrl: 'views/propertyView.html'
+        })
         .state('users', {
             url: '/users',
             templateUrl: 'views/userView.html'

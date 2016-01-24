@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 class RentalUnitController extends Controller
@@ -73,7 +74,10 @@ class RentalUnitController extends Controller
      */
     public function update(Request $request, RentalUnit $rentalUnit)
     {
-        //
+        //Use fill() to automatically fill in the fields
+        $rentalUnit->fill(Input::all());
+        $rentalUnit->save();
+        return Response::json($rentalUnit);
     }
 
     /**
