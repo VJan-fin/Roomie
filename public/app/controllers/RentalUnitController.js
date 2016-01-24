@@ -97,7 +97,7 @@ roomie.controller('RentalUnitController',
                     $scope.property = data;
                     $scope.property.move_in_from = new Date($scope.property.move_in_from);
                     $scope.loading = false;
-                    console.log($scope.property);
+                    //console.log($scope.property);
                 }).error(function(data) {
                     console.log(data);
                     $scope.loading = false;
@@ -115,8 +115,9 @@ roomie.controller('RentalUnitController',
 
                 RentalUnitService.saveProperty($scope.property).success(function (data) {
                     $scope.loading = false;
-                    $scope.property = data;
-                    console.log(data);
+                    $scope.getSingleRentalUnit();
+                    //$scope.property = data;
+                    //console.log(data);
                 }).error(function (data) {
                     console.log(data);
                     $scope.loading = false;
