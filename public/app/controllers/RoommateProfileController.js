@@ -53,7 +53,7 @@ roomie.controller('RoommateProfileController',
                     $scope.loading = false;
                     $scope.profile = data;
                     $scope.profile.move_in_from = new Date($scope.profile.move_in_from);
-                    console.log(data);
+                    //console.log(data);
                 }).error(function (data) {
                     console.log(data);
                     $scope.loading = false;
@@ -66,6 +66,9 @@ roomie.controller('RoommateProfileController',
                     return;
 
                 $scope.loading = true;
+                //alert($scope.profile);
+                //console.log($scope.profile.move_in_from.toISOString().slice(0, 10));
+                $scope.profile.move_in_from = $scope.profile.move_in_from.toISOString().slice(0, 10);
 
                 ProfileService.saveMyRoommateProfile($scope.profile).success(function (data) {
                     $scope.loading = false;

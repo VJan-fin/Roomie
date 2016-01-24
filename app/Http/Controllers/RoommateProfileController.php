@@ -85,8 +85,6 @@ class RoommateProfileController extends Controller
     {
         //Use fill() to automatically fill in the fields
         $profile->fill(Input::all());
-//        $carbon = Carbon::createFromTimestamp(strtotime(Input::get('move_in_from')));
-//        $profile->move_in_from = $carbon->format('d/m/Y');
         $profile->save();
         return Response::json($profile);
     }

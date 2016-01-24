@@ -58,7 +58,7 @@ roomie.controller('PersonalProfileController',
                 ProfileService.getMyPersonalProfile().success(function (data) {
                     $scope.loading = false;
                     $scope.profile = data;
-                    console.log(data);
+                    //console.log(data);
                 }).error(function (data) {
                     console.log(data);
                     $scope.loading = false;
