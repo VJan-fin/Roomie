@@ -22,7 +22,7 @@ var roomie = angular.module('roomie-app', [
 
 // Loading bar configuration - appears on every API call automatically
 roomie.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-  cfpLoadingBarProvider.spinnerTemplate = '<h4><span>Loading . . .</h4>';
+  cfpLoadingBarProvider.spinnerTemplate = '<h4 style="position:fixed; top:45%; left:45%; text-align:center; background-color: #2B3E50;  border: 2px solid #DF691A; padding: 20px;"><i class="fa fa-spinner fa-pulse"></i> <span>Loading . . .</h4>';
 }]);
 
 roomie.config(function($stateProvider) {
@@ -43,8 +43,12 @@ roomie.config(function($stateProvider) {
             templateUrl: 'views/profileView.html'
         })
         .state('propertyPage', {
-            url: '/propertyPage',
+            url: '/propertyPage/{id}',
             templateUrl: 'views/propertyView.html'
+        })
+        .state('propertyList', {
+            url: '/propertyList',
+            templateUrl: 'views/propertyListView.html'
         })
         .state('users', {
             url: '/users',

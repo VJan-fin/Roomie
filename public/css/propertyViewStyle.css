@@ -10,6 +10,20 @@ span[editable-checkbox] {
     color: white !important;
 }
 
+span.ng-binding {
+    color: #DF691A;
+}
+
 #propertyDescription {
     margin-top: 30px;
+}
+
+.propertyUnitBlock {
+    margin-bottom: 40px !important;
+    border-radius: 10px !important;
+}
+
+.propertyUnitBlock .panel-heading {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
 }

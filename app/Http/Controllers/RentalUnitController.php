@@ -19,7 +19,8 @@ class RentalUnitController extends Controller
      */
     public function index()
     {
-        return Response::json(RentalUnit::all());
+        $rentalUnits = RentalUnit::orderBy('created_at', 'desc')->paginate(2);
+        return Response::json($rentalUnits);
     }
 
     /**

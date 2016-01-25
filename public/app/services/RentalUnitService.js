@@ -6,10 +6,13 @@ roomie.factory('RentalUnitService', function($http) {
 
     return {
 
+        rentalUnitToShow: -1,
+
         // get all the rental units
-        getAll: function() {
+        // page_number is useful for pagination
+        getAll: function(page_number) {
             return $http({
-                url: 'api/RentalUnit',
+                url: 'api/RentalUnit?page=' + page_number,
                 method: "GET"
             });
         },

@@ -48,7 +48,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="#/home">Home</a></li>
-            <li><a href="#">Page 1</a></li>
+            <li><a href="#/propertyList">Browse Properties</a></li>
             <li><a href="#">Page 2</a></li>
             <li><a href="#">Page 3</a></li>
         </ul>
@@ -58,7 +58,6 @@
                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user fa-lg fa-fw"></i>Welcome, {{currentUser.name}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#/personalProfile">My Profile</a></li>
-                    <li><a href="#/propertyPage">My Property</a></li>
                     <li ng-click="logout()"><a href>Logout</a></li>
                 </ul>
             </li>

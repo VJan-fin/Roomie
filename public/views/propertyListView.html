@@ -1,0 +1,110 @@
+<!-- PROPERTY INFORMATION -->
+<div class="container" ng-controller="RentalUnitController">
+
+    <h3>Check out what's available on Roomie!</h3>
+
+
+    <!-- PROPERTY LIST-->
+    <div class="panel-group" style="margin-top: 40px">
+
+            <div class="panel panel-default propertyUnitBlock" ng-repeat="property in rentalUnits">
+                <div class="panel-heading">
+                    <h4 style="display: inline-block">
+                        <span style="font-weight: bold">Property #{{property.id}}</span> <br />
+                        <small>Posted on Roomie <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+                        </small>
+                    </h4>
+
+                    <span class="buttons" style="float: right; margin-right: 10px;">
+                        <!-- button to show form -->
+                        <button type="button" class="btn btn-default" ng-click="showProperty(property.id)">
+                            <i class="fa fa-plus fw"></i>
+                            See more...
+                        </button>
+                    </span>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-home78"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="type" class="title">Property type: </label>
+                            <span id="type">{{ property.type }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-sign20"></i>
+                            <!-- editable field -->
+                            <label for="lease_length" class="title">Lease: </label>
+                            <span id="lease_length">{{ property.lease_length }} months</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-cocktail17"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="class" class="title">Class: </label>
+                            <span id="class">{{ property.class }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-money132"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="rent" class="title">Rent: </label>
+                            <span id="rent">{{ property.rent }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-logistics3"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label>
+                            <span id="move_in_from">{{ property.move_in_from | date:"dd MMMM yyyy" }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-luxury6"></i>
+                            <!-- editable field -->
+                            <label style="margin-left: 3px" for="furniture" class="title">Furniture: </label>
+                            <span id="furniture">{{ property.furniture }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-building210"></i>
+                            <!-- editable field -->
+                            <label for="city" class="title">City: </label>
+                            <span id="city">{{ property.city }}</span>
+                        </div>
+                        <div class="col-sm-8">
+                            <i class="flaticon-location73"></i>
+                            <!-- editable field -->
+                            <label for="address" class="title">Address: </label>
+                            <span id="address">{{ property.address }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-footer" style="margin-top: 20px;">
+
+                        <div class="row">
+                            <div class="col-sm-2">Description:</div>
+                            <div id="description" class="col-sm-6">
+                                <!-- editable field -->
+                                <span>{{ property.description.substring(0, 200) }}</span> <span class="ng-binding" ng-if="property.description.length > 200">. . .</span>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+    </div>
+
+
+    <!-- PAGINATION -->
+    <uib-pagination total-items="pagination.totalItems" items-per-page="pagination.perPage" ng-model="pagination.currentPage" ng-change="getAllRentalUnits()" rotate="true" force-ellipses="true" boundary-link-numbers="true"></uib-pagination>
+
+</div>

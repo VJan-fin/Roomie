@@ -17,7 +17,7 @@
                 <div class="panel-heading">
                     <h4 style="display: inline-block">Personal Information</h4>
 
-                    <span class="buttons" style="float: right; margin-right: 10px;">
+                    <span class="buttons" style="float: right; margin-right: 10px;" ng-show="authenticated && currentUser.id == profile.for_user">
                         <!-- button to show form -->
                         <button type="button" class="btn btn-default" ng-click="profileForm.$show()" ng-show="!profileForm.$visible">
                             <i class="fa fa-pencil fw"></i>
@@ -132,7 +132,7 @@
                 <div class="panel-heading">
                     <h4 style="display: inline-block">Roommate Information</h4>
 
-                    <span class="buttons" style="float: right; margin-right: 10px;">
+                    <span class="buttons" style="float: right; margin-right: 10px;" ng-show="authenticated && currentUser.id == profile.for_user">
                         <!-- button to show form -->
                         <button type="button" class="btn btn-default" ng-click="profileForm.$show()" ng-show="!profileForm.$visible">
                             <i class="fa fa-pencil fw"></i>

@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <h4 style="display: inline-block">Property Details</h4>
 
-                    <span class="buttons" style="float: right; margin-right: 10px;">
+                    <span class="buttons" style="float: right; margin-right: 10px;" ng-show="authenticated && currentUser.id == property.user_id">
                         <!-- button to show form -->
                         <button type="button" class="btn btn-default" ng-click="propertyForm.$show()" ng-show="!propertyForm.$visible">
                             <i class="fa fa-pencil fw"></i>
@@ -49,7 +49,7 @@
                             <span id="rent" editable-text="property.rent" ng-show="!propertyForm.$visible" e-name="rent" e-required>{{ property.rent || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-4">
-                            <i class="flaticon-home78"></i>
+                            <i class="flaticon-cocktail17"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="class" class="title">Property class: </label>
                             <span id="class" editable-select="property.class" ng-show="!propertyForm.$visible" e-name="class" e-ng-options="c.value as c.text for c in classes" e-required>{{ showClass(property) }}</span>
@@ -71,19 +71,19 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="flaticon-sign20"></i>
+                            <i class="flaticon-beds12"></i>
                             <!-- editable field -->
                             <label for="num_bedrooms" class="title">Number of bedrooms: </label>
                             <span id="num_bedrooms" editable-number="property.num_bedrooms" ng-show="!propertyForm.$visible" e-name="num_bedrooms" e-min="0" e-required>{{ property.num_bedrooms || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-4">
-                            <i class="flaticon-sign20"></i>
+                            <i class="flaticon-bathtub3"></i>
                             <!-- editable field -->
                             <label for="num_bathrooms" class="title">Number of bathrooms: </label>
                             <span id="num_bathrooms" editable-number="property.num_bathrooms" ng-show="!propertyForm.$visible" e-name="num_bathrooms" e-min="0" e-required>{{ property.num_bathrooms || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-4">
-                            <i class="flaticon-home78"></i>
+                            <i class="flaticon-luxury6"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="furniture" class="title">Furniture: </label>
                             <span id="furniture" editable-select="property.furniture" ng-show="!propertyForm.$visible" e-name="furniture" e-ng-options="f.value as f.text for f in furnished" e-required>{{ showFurniture(property) }}</span>
@@ -92,13 +92,13 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="flaticon-user168"></i>
+                            <i class="flaticon-building210"></i>
                             <!-- editable field -->
                             <label for="city" class="title">City: </label>
                             <span id="city" editable-text="property.city" ng-show="!propertyForm.$visible" e-name="city" e-required>{{ property.city || '--unknown--' }}</span>
                         </div>
                         <div class="col-sm-8">
-                            <i class="flaticon-career1"></i>
+                            <i class="flaticon-location73"></i>
                             <!-- editable field -->
                             <label for="address" class="title">Address: </label>
                             <span id="address" editable-text="property.address" ng-show="!propertyForm.$visible" e-name="address" e-required>{{ property.address || '--unknown--' }}</span>
