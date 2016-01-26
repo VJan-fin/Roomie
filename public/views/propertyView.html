@@ -273,6 +273,8 @@
 
                         </div>
 
+                        <!-- PAGINATION -->
+                        <uib-pagination total-items="pagination.totalItems" items-per-page="pagination.perPage" ng-model="pagination.currentPage" ng-change="getAllComments()" rotate="true" force-ellipses="true" boundary-link-numbers="true"></uib-pagination>
 
                     </div>
                 </div>
@@ -281,4 +283,5 @@
         <div class="col-sm-1"></div>
 
     </div>
+
 </div>
