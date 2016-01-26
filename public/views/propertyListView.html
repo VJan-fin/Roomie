@@ -10,8 +10,11 @@
             <div class="panel panel-default propertyUnitBlock" ng-repeat="property in rentalUnits">
                 <div class="panel-heading">
                     <h4 style="display: inline-block">
-                        <span style="font-weight: bold">Property #{{property.id}}</span> <br />
-                        <small>Posted on Roomie <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+                        <span class="info-text" style="font-weight: bold">Property #{{property.id}}</span> <br />
+                        <small>
+                            Posted on Roomie
+                            <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+                            by {{ property.user.name }}
                         </small>
                     </h4>
 
@@ -31,19 +34,19 @@
                             <i class="flaticon-home78"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="type" class="title">Property type: </label>
-                            <span id="type">{{ property.type }}</span>
+                            <span id="type" class="info-text">{{ property.type }}</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-sign20"></i>
                             <!-- editable field -->
                             <label for="lease_length" class="title">Lease: </label>
-                            <span id="lease_length">{{ property.lease_length }} months</span>
+                            <span id="lease_length" class="info-text">{{ property.lease_length }} months</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-cocktail17"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="class" class="title">Class: </label>
-                            <span id="class">{{ property.class }}</span>
+                            <span id="class" class="info-text">{{ property.class }}</span>
                         </div>
                     </div>
 
@@ -52,19 +55,19 @@
                             <i class="flaticon-money132"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="rent" class="title">Rent: </label>
-                            <span id="rent">{{ property.rent }}</span>
+                            <span id="rent" class="info-text">{{ property.rent }}</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-logistics3"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label>
-                            <span id="move_in_from">{{ property.move_in_from | date:"dd MMMM yyyy" }}</span>
+                            <span id="move_in_from" class="info-text">{{ property.move_in_from | date:"dd MMMM yyyy" }}</span>
                         </div>
                         <div class="col-sm-4">
                             <i class="flaticon-luxury6"></i>
                             <!-- editable field -->
                             <label style="margin-left: 3px" for="furniture" class="title">Furniture: </label>
-                            <span id="furniture">{{ property.furniture }}</span>
+                            <span id="furniture" class="info-text">{{ property.furniture }}</span>
                         </div>
                     </div>
 
@@ -73,13 +76,13 @@
                             <i class="flaticon-building210"></i>
                             <!-- editable field -->
                             <label for="city" class="title">City: </label>
-                            <span id="city">{{ property.city }}</span>
+                            <span id="city" class="info-text">{{ property.city }}</span>
                         </div>
                         <div class="col-sm-8">
                             <i class="flaticon-location73"></i>
                             <!-- editable field -->
                             <label for="address" class="title">Address: </label>
-                            <span id="address">{{ property.address }}</span>
+                            <span id="address" class="info-text">{{ property.address }}</span>
                         </div>
                     </div>
 
@@ -90,7 +93,7 @@
                             <div class="col-sm-2">Description:</div>
                             <div id="description" class="col-sm-6">
                                 <!-- editable field -->
-                                <span>{{ property.description.substring(0, 200) }}</span> <span class="ng-binding" ng-if="property.description.length > 200">. . .</span>
+                                <span class="info-text">{{ property.description.substring(0, 200) }}</span> <span class="info-text" ng-if="property.description.length > 200">. . .</span>
                             </div>
                             <div class="col-sm-3"></div>
                         </div>

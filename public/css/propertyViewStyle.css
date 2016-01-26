@@ -10,7 +10,7 @@ span[editable-checkbox] {
     color: white !important;
 }
 
-span.ng-binding {
+span.info-text {
     color: #DF691A;
 }
 
@@ -26,4 +26,35 @@ span.ng-binding {
 .propertyUnitBlock .panel-heading {
     border-top-left-radius: 10px !important;
     border-top-right-radius: 10px !important;
+}
+
+.delete {
+    background-color: #C9302C;
+    border: 1px solid #C9302C;
+}
+
+.delete:hover {
+    background-color: #DC464B;
+    border: 1px solid #C9302C;
+}
+
+.comment-box {
+    padding: 3px !important;
+    margin: 25px !important;
+    margin-top: 40px !important;
+    border: 1px solid white;
+    border-radius: 10px !important;
+}
+
+.comment-box .panel-heading {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.comment-box p {
+    color: #DF691A;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 4px;
+    text-align: justify;
 }

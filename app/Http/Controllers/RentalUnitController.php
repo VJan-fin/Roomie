@@ -19,7 +19,7 @@ class RentalUnitController extends Controller
      */
     public function index()
     {
-        $rentalUnits = RentalUnit::orderBy('created_at', 'desc')->paginate(2);
+        $rentalUnits = RentalUnit::with('User')->orderBy('created_at', 'desc')->paginate(2);
         return Response::json($rentalUnits);
     }
 
@@ -52,7 +52,7 @@ class RentalUnitController extends Controller
      */
     public function show(RentalUnit $rentalUnit)
     {
-        return Response::json($rentalUnit);
+        return Response::json(RentalUnit::with('User')->where('id', $rentalUnit->id)->first());
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 class CommentController extends Controller
@@ -19,7 +20,8 @@ class CommentController extends Controller
      */
     public function index(RentalUnit $rentalUnit)
     {
-        return Response::json($rentalUnit->comments);
+        $comments = Comment::with('User')->where('on_rental', $rentalUnit->id)->orderBy('created_at', 'asc')->paginate(10);
+        return Response::json($comments);
     }
 
     /**
@@ -40,7 +42,10 @@ class CommentController extends Controller
      */
     public function store(Request $request, RentalUnit $rentalUnit)
     {
-        //
+        $newComment = new Comment();
+        $newComment->fill(Input::all());
+        $newComment->save();
+        return Response::json($newComment);
     }
 
     /**
@@ -85,6 +90,6 @@ class CommentController extends Controller
      */
     public function destroy(RentalUnit $rentalUnit, Comment $comment)
     {
-        //
+        $comment->delete();
     }
 }

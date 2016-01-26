@@ -98,7 +98,7 @@ roomie.controller('RentalUnitController',
                     $scope.pagination.totalItems = data.total;
                     $scope.pagination.perPage = data.per_page;
                     $scope.rentalUnits = data.data;
-                    //console.log(data);
+                    console.log(data);
                     //console.log($scope.rentalUnits);
                 }).error(function (data) {
                     console.log(data);
@@ -109,13 +109,16 @@ roomie.controller('RentalUnitController',
             $scope.getSingleRentalUnit = function() {
                 $scope.loading = true;
 
-                RentalUnitService.getSingle($scope.rentalUnitId).success(function(data) {
+                console.log($stateParams.id);
+
+                RentalUnitService.getSingle($stateParams.id).success(function(data) {
                     $scope.loading = false;
+                    console.log($stateParams.id);
                     // data is an object and should be converted to an array
                     //$scope.rentalUnits = [data];
                     $scope.property = data;
                     $scope.property.move_in_from = new Date($scope.property.move_in_from);
-                    //console.log($scope.property);
+                    console.log(data);
                 }).error(function(data) {
                     console.log(data);
                     $scope.loading = false;
@@ -147,8 +150,8 @@ roomie.controller('RentalUnitController',
              * Initialization of the Rental Unit controller
              */
             $scope.init = function() {
-                if($stateParams.id) {
-                    $scope.rentalUnitId = $stateParams.id;
+                if($stateParams.id !== undefined) {
+                    //$scope.rentalUnitId = $stateParams.id;
                     $scope.getSingleRentalUnit();
                 } else {
                     $scope.getAllRentalUnits();
