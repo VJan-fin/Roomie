@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\PersonalProfile;
+use App\ProfileImage;
 //use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Request;
@@ -61,7 +63,7 @@ class PersonalProfileController extends Controller
      */
     public function show(PersonalProfile $profile)
     {
-        return Response::json($profile);
+        return Response::json(User::with('PersonalProfile', 'ProfileImage')->where('id', $profile->for_user)->first());
     }
 
     /**

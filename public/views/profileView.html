@@ -3,12 +3,28 @@
 <div class="container" ng-controller="PersonalProfileController">
     <img ng-src="images/default-male.png" ng-show="profile.gender == 'Male'" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="100" height="100">
     <img ng-src="images/default-female.png" ng-show="profile.gender == 'Female'" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="304" height="236">
+    <img ng-src="{{ profile.profile_image.location }}" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="100" height="100">
+
 
     <h3>
         Meet {{currentUser.name}} <br />
         <small>Joined Roomie <time am-time-ago="profile.created_at" title="{{ profile.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
         </small>
     </h3>
+
+
+    <!-- UPLOAD PROFILE PICTURE -->
+    <!--<form action="{{'api/User/' + currentUser.id + '/ProfileImage'}}" method="POST" role="form" ng-controller="FileUploadController" enctype="multipart/form-data">-->
+        <!--<input type="file" name="photo" file-model="myFile"/>-->
+        <!--<button type="submit">Upload me</button>-->
+    <!--</form>-->
+
+    <form role="form" ng-controller = "FileUploadController">
+        <input type="file" file-model="photo"/>
+        <button ng-click="uploadFile()">Upload me</button>
+    </form>
+
+
 
     <!-- PERSONAL PROFILE INFORMATION -->
     <div class="panel-group" style="margin-top: 40px">

@@ -54,6 +54,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\RentalUnit');
     }
 
+    public function profileImage()
+    {
+        return $this->hasOne('App\ProfileImage', 'for_user');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         $time = Carbon::createFromTimestamp(strtotime($value));
