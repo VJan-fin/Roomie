@@ -6,7 +6,7 @@
         <small>
             Posted on Roomie
             <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
-            by {{ property.user.name }}
+            by <a href="{{ '#/userProfile/' + property.user.id }}">{{ property.user.name }}</a>
         </small>
     </h3>
 

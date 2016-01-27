@@ -52,7 +52,7 @@ class ProfileImageController extends Controller
 
         // Check if it fails //
         if( $validation->fails() ) {
-            return Response::json($validation->errors());
+            return Response::json($validation->errors()->getMessages(), 400);
         }
 
         /**

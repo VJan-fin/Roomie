@@ -3,9 +3,9 @@
  */
 
 roomie.controller('RoommateProfileController',
-    ['$scope', '$http', '$rootScope', '$filter', 'ProfileService',
+    ['$scope', '$http', '$rootScope', '$filter', '$stateParams', 'ProfileService',
 
-        function($scope, $http, $rootScope, $filter, ProfileService)
+        function($scope, $http, $rootScope, $filter, $stateParams, ProfileService)
         {
             $scope.profile = {};
             $scope.maxValue = 5;
@@ -44,12 +44,12 @@ roomie.controller('RoommateProfileController',
 
             $scope.getMyProfile = function() {
 
-                if(!$rootScope.currentUser)
-                    return;
+                //if(!$rootScope.currentUser)
+                //    return;
 
                 $scope.loading = true;
 
-                ProfileService.getMyRoommateProfile().success(function (data) {
+                ProfileService.getMyRoommateProfile($stateParams.id).success(function (data) {
                     $scope.loading = false;
                     $scope.profile = data;
                     $scope.profile.move_in_from = new Date($scope.profile.move_in_from);

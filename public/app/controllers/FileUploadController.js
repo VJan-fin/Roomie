@@ -4,19 +4,31 @@
 
 roomie.controller('FileUploadController', ['$scope', '$rootScope', 'FileUploadService', function($scope, $rootScope, FileUploadService){
 
+    $scope.photo_name = "--unknown--";
+    //$scope.photo_size = 0;
+
+    $scope.errors = '';
+
     $scope.uploadFile = function(){
 
         if(!$rootScope.currentUser)
             return;
+        $scope.loading = true;
 
-        var image = $scope.photo;
         var uploadUrl = "api/User/" + $rootScope.currentUser.id + "/ProfileImage";
 
-        FileUploadService.uploadFileToUrl(image, uploadUrl).success(function(data) {
+        FileUploadService.uploadFileToUrl($scope.photo, $scope.caption, $scope.description, uploadUrl).success(function(data) {
+            $scope.loading = false;
             console.log(data);
+            $scope.errors = '';
+            $scope.caption = '';
+            $scope.description = '';
+            $scope.photo = '';
             $scope.$parent.getMyProfile();
         }).error(function(data) {
-            console.log(data);
+            $scope.loading = false;
+            $scope.errors = data.photo;
+            //console.log($scope.errors.photo);
         });
     };
 

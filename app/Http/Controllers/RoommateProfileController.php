@@ -60,7 +60,7 @@ class RoommateProfileController extends Controller
      */
     public function show(RoommateProfile $profile)
     {
-        return Response::json($profile);
+        return Response::json(RoommateProfile::where('for_user', $profile->id)->first());
     }
 
     /**

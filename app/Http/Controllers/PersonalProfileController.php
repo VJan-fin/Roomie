@@ -63,7 +63,7 @@ class PersonalProfileController extends Controller
      */
     public function show(PersonalProfile $profile)
     {
-        return Response::json(User::with('PersonalProfile', 'ProfileImage')->where('id', $profile->for_user)->first());
+        return Response::json(User::with('PersonalProfile', 'ProfileImage')->where('id', $profile->id)->first());
     }
 
     /**

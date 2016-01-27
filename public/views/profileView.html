@@ -1,33 +1,81 @@
 
 <!-- PERSONAL PROFILE INFORMATION -->
 <div class="container" ng-controller="PersonalProfileController">
-    <img ng-src="images/default-male.png" ng-show="profile.gender == 'Male'" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="100" height="100">
-    <img ng-src="images/default-female.png" ng-show="profile.gender == 'Female'" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="304" height="236">
-    <img ng-src="{{ profile.profile_image.location }}" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="100" height="100">
+    <img ng-src="images/default-male.png" ng-show="profile.gender == 'Male' && !profilePicture" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="120" height="130">
+    <img ng-src="images/default-female.png" ng-show="profile.gender == 'Female' && !profilePicture" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="120" height="130">
+    <img ng-src="{{ profilePicture.location }}" ng-show="profilePicture" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="120" height="130">
 
 
     <h3>
-        Meet {{currentUser.name}} <br />
+        Meet {{ user.name }} <br />
         <small>Joined Roomie <time am-time-ago="profile.created_at" title="{{ profile.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
         </small>
     </h3>
 
 
     <!-- UPLOAD PROFILE PICTURE -->
-    <!--<form action="{{'api/User/' + currentUser.id + '/ProfileImage'}}" method="POST" role="form" ng-controller="FileUploadController" enctype="multipart/form-data">-->
-        <!--<input type="file" name="photo" file-model="myFile"/>-->
-        <!--<button type="submit">Upload me</button>-->
-    <!--</form>-->
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoUpload" ng-show="authenticated && currentUser.id == profile.for_user">Change profile picture</button>
+    <div style="margin-top: 70px" ng-show="!authenticated || currentUser.id != profile.for_user"></div>
 
-    <form role="form" ng-controller = "FileUploadController">
-        <input type="file" file-model="photo"/>
-        <button ng-click="uploadFile()">Upload me</button>
+    <!-- Modal -->
+    <form id="photoUpload" class="modal fade" role="dialog" ng-controller="FileUploadController">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Upload a profile picture</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger fade-in" ng-show="errors.length != 0">
+                        <a href class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong> <br />
+                        <div ng-repeat="err in errors">{{ err }}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoName" class="title">File name:</label>
+                        <span id="photoName" class="info-text">{{ photo_name }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoSize" class="title">File size:</label>
+                        <span id="photoSize" class="info-text">{{ (photo_size / 1024 | number:0) || 0 }} KB</span>
+                        <!--<span class="info-text" ng-show="!photo_size">0 KB</span>-->
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" class="btn" file-model="photo" file-data />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imgCaption" class="title">Caption:</label>
+                        <textarea id="imgCaption" placeholder="Enter caption..." name="caption" ng-model="caption" class="form-control" rows="1" maxlength="50"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imgDescription" class="title">Photo description:</label>
+                        <textarea id="imgDescription" placeholder="Enter description..." name="description" ng-model="description" class="form-control" rows="4" maxlength="500"></textarea>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" ng-click="uploadFile()">Upload</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
     </form>
 
 
 
     <!-- PERSONAL PROFILE INFORMATION -->
-    <div class="panel-group" style="margin-top: 40px">
+    <div class="panel-group" style="margin-top: 40px; clear: both">
         <form editable-form name="profileForm" onaftersave="saveMyProfile()">
             <div class="panel panel-default">
                 <div class="panel-heading">

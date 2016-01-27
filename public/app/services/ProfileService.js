@@ -7,9 +7,9 @@ roomie.factory('ProfileService', function($http, $rootScope) {
     return {
 
 
-        getMyPersonalProfile: function() {
+        getMyPersonalProfile: function(user_id) {
             return $http({
-                url: 'api/PersonalProfile/' + $rootScope.currentUser.id,
+                url: 'api/PersonalProfile/' + user_id,
                 method: "GET"
             });
         },
@@ -26,9 +26,9 @@ roomie.factory('ProfileService', function($http, $rootScope) {
         },
 
 
-        getMyRoommateProfile: function() {
+        getMyRoommateProfile: function(user_id) {
             return $http({
-                url: 'api/RoommateProfile/' + $rootScope.currentUser.id,
+                url: 'api/RoommateProfile/' + user_id,
                 method: "GET"
             });
         },

@@ -3,11 +3,12 @@
  */
 
 roomie.controller('PersonalProfileController',
-    ['$scope', '$http', '$rootScope', '$filter', 'ProfileService',
+    ['$scope', '$http', '$rootScope', '$filter', '$stateParams', 'ProfileService',
 
-        function($scope, $http, $rootScope, $filter, ProfileService)
+        function($scope, $http, $rootScope, $filter, $stateParams, ProfileService)
         {
             $scope.profile = {};
+            $scope.profilePicture = {};
 
             $scope.sexes = [
                 {value: 'Male', text: 'Male'},
@@ -50,14 +51,16 @@ roomie.controller('PersonalProfileController',
 
             $scope.getMyProfile = function() {
 
-                if(!$rootScope.currentUser)
-                    return;
+                //if(!$rootScope.currentUser)
+                //    return;
 
                 $scope.loading = true;
 
-                ProfileService.getMyPersonalProfile().success(function (data) {
+                ProfileService.getMyPersonalProfile($stateParams.id).success(function (data) {
                     $scope.loading = false;
-                    $scope.profile = data;
+                    $scope.user = data;
+                    $scope.profile = data.personal_profile;
+                    $scope.profilePicture = data.profile_image;
                     //console.log(data);
                 }).error(function (data) {
                     console.log(data);

@@ -38,8 +38,8 @@ roomie.config(function($stateProvider) {
             templateUrl: 'views/authView.html',
             controller: 'AuthController as auth'
         })
-        .state('personalProfile', {
-            url: '/personalProfile',
+        .state('userProfile', {
+            url: '/userProfile/{id}',
             templateUrl: 'views/profileView.html'
         })
         .state('propertyPage', {
@@ -147,6 +147,10 @@ roomie.run(function($rootScope, $state, editableOptions) {
 
 });
 
+/**
+ * AngularJS directive that binds the uploaded image
+ * to a scope model
+ */
 roomie.directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
@@ -161,4 +165,21 @@ roomie.directive('fileModel', ['$parse', function ($parse) {
             });
         }
     };
+}]);
+
+/**
+ * AngularJS directive that gives the image name and size
+ */
+roomie.directive('fileData', [function () {
+    return {
+        link: function (scope, element, attrs) {
+            element.bind('change', function(evt) {
+                var files = evt.target.files;
+                scope.$apply(function(){
+                    scope.photo_name = files[0].name;
+                    scope.photo_size = files[0].size;
+                });
+            });
+        }
+    }
 }]);

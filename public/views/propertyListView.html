@@ -10,11 +10,11 @@
             <div class="panel panel-default propertyUnitBlock" ng-repeat="property in rentalUnits">
                 <div class="panel-heading">
                     <h4 style="display: inline-block">
-                        <span class="info-text" style="font-weight: bold">Property #{{property.id}}</span> <br />
+                        <span class="info-text" style="font-weight: bold"><a href="{{ '#/propertyPage/' + property.id }}">Property #{{property.id}}</a></span> <br />
                         <small>
                             Posted on Roomie
                             <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
-                            by {{ property.user.name }}
+                            by <a href="{{ '#/userProfile/' + property.user.id }}">{{ property.user.name }}</a>
                         </small>
                     </h4>
 
