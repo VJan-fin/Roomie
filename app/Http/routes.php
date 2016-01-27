@@ -37,6 +37,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::resource('RentalUnit', 'RentalUnitController');
     Route::resource('RentalUnit.Comment', 'CommentController');
     Route::resource('User.ProfileImage', 'ProfileImageController');
+    Route::resource('RentalUnit.PropertyPicture', 'PropertyPictureController');
 });
 
 // CATCH ALL ROUTE =============================

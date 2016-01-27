@@ -54,6 +54,9 @@ roomie.config(function($stateProvider) {
             url: '/users',
             templateUrl: 'views/userView.html'
             //controller: 'UserController as user'
+        }).state('gallery', {
+            url: '/gallery',
+            templateUrl: 'views/gallery.html'
         });
 
 });

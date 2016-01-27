@@ -31,6 +31,8 @@
 <!--    <link href="css/xeditable.css" rel='stylesheet' type='text/css'>-->
     <link href="css/flaticon.css" rel='stylesheet'>
 <!--    <link href="css/angular.rangeSlider.css">-->
+    <link href="css/finalTilesGallery.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/main.css" rel="stylesheet">
@@ -96,6 +98,9 @@
     <!-- Editable form elements -->
     <script src="app/libraries/xeditable.js"></script>
 <!--    <script src="app/libraries/angular.rangeSlider.js"></script>-->
+    <script src="app/libraries/freewall.js"></script>
+    <script src="app/libraries/finalTilesGallery.js"></script>
+    <script src="app/libraries/lightbox.js"></script>
 
 
     <!-- load momentJS (required for angular-moment) -->
