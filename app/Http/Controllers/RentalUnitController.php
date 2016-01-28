@@ -52,7 +52,7 @@ class RentalUnitController extends Controller
      */
     public function show(RentalUnit $rentalUnit)
     {
-        return Response::json(RentalUnit::with('User')->where('id', $rentalUnit->id)->first());
+        return Response::json(RentalUnit::with('User')->with('PropertyPicture')->where('id', $rentalUnit->id)->first());
     }
 
     /**

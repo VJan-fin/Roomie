@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class PropertyPictureController extends Controller
 {
@@ -61,6 +62,7 @@ class PropertyPictureController extends Controller
         $file = $request->file('photo');
         $destination_path = 'propertyImages/' . $property->id . '/';
         $filename = time() . '_'  . $file->getClientOriginalName();
+        $filename_thumb = time() . '_thumb_'  . $file->getClientOriginalName();
 
         /**
          * Check whether the path exists
@@ -72,17 +74,21 @@ class PropertyPictureController extends Controller
         /**
          * Save the image to the specified path under the specified name
          */
+        Image::make($file->getRealPath())->resize(null, 300, function($constraint) {
+            $constraint->aspectRatio();
+        })->save($destination_path . $filename_thumb);
         $file->move($destination_path, $filename);
 
         /**
          * Save the image into the database
          */
         $image->location = $destination_path . $filename;
+        $image->thumb_location = $destination_path . $filename_thumb;
         $image->caption = $request->input('caption');
         $image->mime_type = $file->getClientMimeType();
-        $property->propertyPictures()->save($image);
+        $property->propertyPicture()->save($image);
 
-        return Response::json(RentalUnit::with('PropertyPicture')->where('id', $property->id)->first());
+        return Response::json(RentalUnit::with('User')->with('PropertyPicture')->where('id', $property->id)->first());
     }
 
     /**

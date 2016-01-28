@@ -3,10 +3,150 @@
         width: 320px;
         height: 320px;
     }
+
+    html { font-family: Arial, sans-serif; background: #111; }
+    img { border:0; }
+    #final-tg {
+        max-width: 100%;
+        margin: auto;
+        margin-left: -15px;
+    }
+    li { display: inline-block; margin-right: 10px; }
+    li a { color: #a6d1ff; text-decoration: none; }
+    li a:hover, li a.selected { color: #fff; }
+
+    /* social icons */
+    .tile .ftg-social {
+        position: absolute;
+        bottom: 33px;
+        right: 33px;
+        background:url(images/opaque.png);
+        background: rgba(0,0,0, .7);
+        padding: 3px;
+        border-radius: 4px;
+        text-align: right;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        opacity: 0;
+        -moz-transition: opacity .5s;
+        -o-transition: opacity .5s;
+        -webkit-transition: opacity .5s;
+        transition: opacity .5s;
+        height: 24px;
+    }
+    .tile .ftg-social a {
+        float: left;
+        width:24px;
+        height:24px;
+        margin-left:5px;
+        font-size:0;
+        color:transparent;
+        line-height: 24px;
+        margin: 0;
+    }
+    .tile:hover .ftg-social {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        opacity: 1;
+    }
+    .tile .ftg-social a:first-child { margin-left: 0; }
+    /* icons from http://www.iconarchive.com/show/round-social-icons-by-brainleaf.html*/
+    .tile .ftg-social .tw-icon { background: url(images/twitter-icon.png); }
+    .tile .ftg-social .fb-icon { background: url(images/facebook-icon.png); }
+    .tile .ftg-social .gp-icon { background: url(images/google-plus-icon.png); }
+    .tile .ftg-social .pi-icon { background: url(images/pinterest-icon.png); }
+    /* --------------------- */
+
+
+    /* style 1 */
+    .style-1 #final-tg .tile .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background:url(images/opaque.png);
+        background: rgba(57, 255, 243, .5);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        opacity: 0;
+        -moz-transition: all .3s;
+        -o-transition: all .3s;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        height: 100%;
+        text-align:center;
+    }
+    .style-1 #final-tg .tile .tile-inner {
+        border-radius: 4px;
+        border: 1px solid #666;
+        -webkit-box-shadow: #333 0px 0px 10px;
+        box-shadow: #333 0px 0px 10px;
+    }
+    .style-1 #final-tg .tile a:hover .caption {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        opacity:1;
+    }
+    .style-1 #final-tg .tile a img {
+        -moz-transition: -moz-transform .3s;
+        -o-transition: -o-transform .3s;
+        -webkit-transition: -webkit-transform .3s;
+        transition: transform .3s;
+    }
+    .style-1 #final-tg .tile-inner:hover img {
+        -moz-transform: rotate(10deg) scale(1.5);
+        -ms-transform: rotate(10deg) scale(1.5);
+        -o-transform: rotate(10deg) scale(1.5);
+        -webkit-transform: rotate(10deg) scale(1.5);
+        transform: rotate(10deg) scale(1.5);
+    }
+    .style-1 #final-tg .tile .caption p {
+        margin: 10px;
+        margin-top:-50px;
+        border-radius: 3px;
+        border: 1px solid #000;
+        -webkit-box-shadow: #000 0px 0px 10px;
+        box-shadow: #000 0px 0px 10px;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        font-family: 'Alef', sans-serif;
+        -webkit-text-shadow: #000 1px 1px 1px;
+        text-shadow: #000 1px 1px 1px;
+        display: inline-block;
+        padding: 3px 10px;
+        background:url(images/opaque.png);
+        background: rgba(0,0,0,.7);
+        -moz-transition: all .2s;
+        -o-transition: all .2s;
+        -webkit-transition: all .2s;
+        transition: all .2s;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        opacity:0;
+    }
+    .style-1 #final-tg .tile .caption:hover p {
+        margin-top:10px;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        opacity:1;
+    }
+    /* --------------------- */
+
+
+
+    h1 { color: #fff; }
+    h2 { color: #999; }
+
 </style>
 
-<div id="gallery" class="final-tiles-gallery effect-zoom effect-fade-out caption-top">
+<div class="container">
+<div class="panel panel-default style-1">
+    <div class="panel-heading">
+        <h3>Panel title</h3>
+    </div>
+    <div class="panel-body">
+<div id="final-tg" class="final-tiles-gallery effect-zoom effect-fade-out caption-top">
     <div class="ftg-items">
+        <div class="tile">
+            <a data-lightbox="gallery" data-title="Image 4" class="tile-inner" href="http://static6.businessinsider.com/image/50ff105a6bb3f7b936000009/heres-one-brilliant-interior-design-plan-for-nycs-new-micro-apartments.jpg">
+                <img class="item" src="http://static6.businessinsider.com/image/50ff105a6bb3f7b936000009/heres-one-brilliant-interior-design-plan-for-nycs-new-micro-apartments.jpg" data-src="http://static6.businessinsider.com/image/50ff105a6bb3f7b936000009/heres-one-brilliant-interior-design-plan-for-nycs-new-micro-apartments.jpg" />
+            </a>
+        </div>
         <div class="tile">
             <a data-lightbox="gallery" data-title="Lorem ipsum - Pellentesque ornare ornare" class="tile-inner" href="http://balsem.xyz/wp-content/uploads/2016/01/interior-design-ideas-for-apartments-modern-apartment-interior-decorating-ideas.jpg">
                 <img class="item" src="http://balsem.xyz/wp-content/uploads/2016/01/interior-design-ideas-for-apartments-modern-apartment-interior-decorating-ideas.jpg" data-src="http://balsem.xyz/wp-content/uploads/2016/01/interior-design-ideas-for-apartments-modern-apartment-interior-decorating-ideas.jpg" />
@@ -22,21 +162,18 @@
                 <img class="item" src="http://www.amli.com/AMLIcontent/files/apartments/houston/2121/apartment-interior/2121-apartment-interior-living-room-1_B.jpg" data-src="http://www.amli.com/AMLIcontent/files/apartments/houston/2121/apartment-interior/2121-apartment-interior-living-room-1_B.jpg" />
             </a>
         </div>
-        <div class="tile">
-            <a data-lightbox="gallery" data-title="Image 4" class="tile-inner" href="http://static6.businessinsider.com/image/50ff105a6bb3f7b936000009/heres-one-brilliant-interior-design-plan-for-nycs-new-micro-apartments.jpg">
-                <img class="item" src="http://static6.businessinsider.com/image/50ff105a6bb3f7b936000009/heres-one-brilliant-interior-design-plan-for-nycs-new-micro-apartments.jpg" data-src="http://static6.businessinsider.com/image/50ff105a6bb3f7b936000009/heres-one-brilliant-interior-design-plan-for-nycs-new-micro-apartments.jpg" />
-            </a>
-        </div>
     </div>
 </div>
-
+    </div>
+</div>
+</div>
 
 
 
 <script type="text/javascript" charset="utf-8">
 
     $(document).ready(function() {
-        $('#gallery').finalTilesGallery();
+        $('#final-tg').finalTilesGallery();
     });
 
 

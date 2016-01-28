@@ -1,8 +1,8 @@
-/*	
+/*
 	Final Tiles Gallery by Green Tree Labs
 	All rights reserved
 	http://codecanyon.net/item/final-tiles-gallery/4734090?ref=GreenTreeLabs
-	
+
 */
 (function ($) {
     $.finalTilesGallery = function (element, options) {
@@ -375,7 +375,7 @@
                 var url = "http://pinterest.com/pin/create/button/?url=" + encodeURI(location.href) + "&description=" + encodeURI(text);
 
                 if (image.length == 1) {
-                    var src = image.attr("src");                    
+                    var src = image.attr("src");
                     url += ("&media=" + qualifyURL(src));
                 }
 
@@ -428,7 +428,7 @@
                     entile($tile);
                 }
 
-                img.onload = function () {                    
+                img.onload = function () {
                     $tile.find(".item")
                             .data("width", this.width)
                             .data("height", this.height);
@@ -499,7 +499,7 @@
 
         var entile = function ($tiles) {
             if (!grid)
-                grid = new Grid(plugin.settings.gridCellSize, plugin.settings.margin, plugin.settings.minTileWidth, $element.width());            
+                grid = new Grid(plugin.settings.gridCellSize, plugin.settings.margin, plugin.settings.minTileWidth, $element.width());
 
             var transition = firstAnimation ? "none" : "all .5s";
             //var $tiles = $element.find(".tile");
@@ -525,10 +525,10 @@
 
                 var top = slot.cell_size * slot.position.y;
                 var height = slot.cell_size * slot.blocks.v;
-                
+
                 var tileWidth = slot.cell_size * slot.blocks.h - plugin.settings.margin;
                 var tileHeight = slot.cell_size * slot.blocks.v - plugin.settings.margin;
-                
+
                 if (top + tileHeight > maxHeight)
                     maxHeight = top + height + plugin.settings.margin;
 

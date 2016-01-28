@@ -1,3 +1,16 @@
+<style>
+    .thumbnail_cust {
+        height: 50px;
+    }
+    .thumbnail_cust img {
+        display: block;
+        width: auto;
+        height: 100%;
+    }
+
+</style>
+
+
 <!-- PROPERTY INFORMATION -->
 <div class="container" ng-controller="RentalUnitController">
 
@@ -9,6 +22,58 @@
             by <a href="{{ '#/userProfile/' + property.user.id }}">{{ property.user.name }}</a>
         </small>
     </h3>
+
+
+    <!-- UPLOAD PROPERTY PICTURE -->
+
+    <!-- Modal -->
+    <form id="propertyPhotoUpload" class="modal fade" role="dialog" ng-controller="FileUploadController">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Upload a new photo</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger fade-in" ng-show="errors.length != 0">
+                        <a href class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong> <br />
+                        <div ng-repeat="err in errors">{{ err }}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoName" class="title">File name:</label>
+                        <span id="photoName" class="info-text">{{ photo_name }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoSize" class="title">File size:</label>
+                        <span id="photoSize" class="info-text">{{ (photo_size / 1024 | number:0) || 0 }} KB</span>
+                        <!--<span class="info-text" ng-show="!photo_size">0 KB</span>-->
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" class="btn" file-model="photo" file-data />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imgCaption" class="title">Caption:</label>
+                        <textarea id="imgCaption" placeholder="Enter caption..." name="caption" ng-model="caption" class="form-control" rows="2" maxlength="50"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" ng-click="uploadRentalPhoto()">Upload</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
 
     <!-- PROPERTY DETAILS-->
     <div class="panel-group" style="margin-top: 40px">
@@ -210,8 +275,48 @@
         </form>
     </div>
 
-</div>
 
+    <!-- PROPERTY PHOTOS -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 style="display: inline-block">Property Photos</h4>
+
+
+            <span class="buttons" style="float: right; margin-right: 10px;" ng-show="authenticated && currentUser.id == property.user_id">
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#propertyPhotoUpload">
+                    <i class="fa fa-arrow-circle-up fw"></i>
+                    Upload new photo
+                </button>
+            </span>
+
+        </div>
+
+        <div class="panel-body">
+
+            <h3 ng-show="photos.length == 0">No uploaded photos yet</h3>
+
+            <!-- PHOTO GALLERY -->
+            <div id="final-tg" class="row">
+                <div style="padding: 5px" class="col-sm-4" ng-repeat="photo in photos">
+                    <a data-lightbox="gallery" data-title="{{ photo.caption }}" href="{{ photo.location }}">
+                        <img style="display: block;
+    margin-left: auto;
+    margin-right: auto;" class="img-thumbnail" src="{{ photo.thumb_location }}" data-src="{{ photo.thumb_location }}" />
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="panel-footer" style="margin-top: 20px;">
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
 
 
 <!-- COMMENTS -->

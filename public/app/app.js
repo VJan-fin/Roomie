@@ -186,3 +186,63 @@ roomie.directive('fileData', [function () {
         }
     }
 }]);
+
+roomie.directive("imageResize", [
+    "$parse", function($parse) {
+        return {
+            link: function(scope, elm, attrs) {
+                var imagePercent;
+                imagePercent = $parse(attrs.imagePercent)(scope);
+                return elm.one("load", function() {
+                    var canvas, ctx, neededHeight, neededWidth;
+                    if(elm[0].height > 600 || elm[0].width > 800) {
+                        neededHeight = elm[0].height * imagePercent / 100;
+                        neededWidth = elm[0].width * imagePercent / 100;
+                    }
+                    canvas = document.createElement("canvas");
+                    canvas.width = neededWidth;
+                    canvas.height = neededHeight;
+                    ctx = canvas.getContext("2d");
+                    ctx.drawImage(elm[0], 0, 0, neededWidth, neededHeight);
+                    return elm.attr('src', canvas.toDataURL("image/jpeg"));
+                });
+            }
+        };
+    }
+]);
+
+//roomie.directive('myRepeatDirective', function() {
+//    return function(scope, element, attrs) {
+//        //angular.element(element).css('color','blue');
+//        if (scope.$last){
+//            //window.alert("im the last!");
+//            $("#final-tg").finalTilesGallery({
+//                minTileWidth: 180,
+//                margin: 30,
+//                gridCellSize: 20
+//            });
+//        }
+//    };
+//});
+
+//roomie.directive('myMainDirective', function() {
+//    return {
+//        restrict: 'A',
+//        link: function (scope, element, attrs) {
+//            //element.finalTilesGallery();
+//            console.log('finished');
+//            //whatever other logic would go here
+//        }
+//    };
+//});
+//
+//roomie.directive('myDirective', function() {
+//    return {
+//        restrict: 'A',
+//        link: function (scope, element, attrs) {
+//            //element.finalTilesGallery();
+//            console.log('repeated');
+//            //whatever other logic would go here
+//        }
+//    };
+//});

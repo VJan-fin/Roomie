@@ -21,6 +21,7 @@ class CreateProperyPicturesTable extends Migration
             $table->string('caption', 50)->nullable();
 
             $table->string('location');
+            $table->string('thumb_location');
             $table->string('mime_type');
 
             $table->timestamps();

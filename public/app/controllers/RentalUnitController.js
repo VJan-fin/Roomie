@@ -118,6 +118,7 @@ roomie.controller('RentalUnitController',
                     //$scope.rentalUnits = [data];
                     $scope.property = data;
                     $scope.property.move_in_from = new Date($scope.property.move_in_from);
+                    $scope.photos = data.property_picture;
                     console.log(data);
                 }).error(function(data) {
                     console.log(data);
@@ -153,6 +154,7 @@ roomie.controller('RentalUnitController',
                 if($stateParams.id !== undefined) {
                     //$scope.rentalUnitId = $stateParams.id;
                     $scope.getSingleRentalUnit();
+
                 } else {
                     $scope.getAllRentalUnits();
                 }
