@@ -1,0 +1,27 @@
+.userBlock {
+    margin-bottom: 40px !important;
+}
+
+.userBlock .panel {
+    border-radius: 10px !important;
+    border-top-left-radius: 40px !important;
+    border-bottom-left-radius: 40px !important;
+}
+
+.userBlock .panel-heading {
+    border-top-left-radius: 40px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 40px !important;
+    border-bottom-right-radius: 10px !important;
+    padding-left: 40px;
+    margin-top: 20px;
+}
+
+.userProfilePicture {
+    z-index: 1;
+}
+
+.userProfilePicture img {
+    border: 1px solid white;
+    padding: 3px;
+}

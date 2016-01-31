@@ -44,6 +44,9 @@ class CreateRentalUnitsTable extends Migration
             $table->boolean('gym')->default(0);
             $table->boolean('doorman')->default(0);
 
+            // is profile active
+            $table->boolean('property_active')->default(1);
+
             $table->timestamps();
         });
     }

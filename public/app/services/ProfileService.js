@@ -6,6 +6,13 @@ roomie.factory('ProfileService', function($http, $rootScope) {
 
     return {
 
+        getAllFullUserProfiles: function(page_number) {
+            return $http({
+                url: 'api/User?page=' + page_number,
+                method: "GET"
+            });
+        },
+
 
         getMyPersonalProfile: function(user_id) {
             return $http({

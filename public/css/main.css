@@ -5,3 +5,19 @@ output.ng-binding {
 #description {
     text-align: justify;
 }
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 4px solid #2B3E50;
+}
+
+.affix + .mainContent {
+    padding-top: 70px;
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
+}

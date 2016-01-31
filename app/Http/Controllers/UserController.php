@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Response::json(User::all());
+        return Response::json(User::with('PersonalProfile')->with('RoommateProfile')->with('ProfileImage')->where('profile_active', 1)->orderBy('created_at', 'desc')->paginate(2));
     }
 
     /**

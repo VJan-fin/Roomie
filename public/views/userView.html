@@ -1,18 +1,120 @@
-<h1>Rental Units</h1>
+<!-- ROOMIE USER LIST -->
+<div class="container" ng-controller="UserController">
 
-<div ng-controller="RentalUnitController">
-    <div class="form-group">
-        <button class="btn btn-primary btn-lg" ng-click="getAllRentalUnits()">Get All</button>
-        <button class="btn btn-primary btn-lg" ng-click="getSingleRentalUnit()">Get Only One</button>
+    <h3>Find your new roomie on Roomie!</h3>
+
+    <div class="panel-group" style="margin-top: 40px">
+
+        <div class="row userBlock" ng-repeat="user in fullProfiles">
+            <div class="col-sm-1 userProfilePicture">
+                <a data-lightbox="{{ user.name }}" ng-show="user.profile_image" data-title="{{ user.profile_image.caption }}" href="{{ user.profile_image.location }}">
+                    <img class="img-circle" width="120" height="130" src="{{ user.profile_image.location }}" data-src="{{ user.profile_image.location }}" />
+                </a>
+                <a data-lightbox="{{ user.name }}_male" ng-show="user.personal_profile.gender == 'Male' && !user.profile_image" data-title="Default male profile picture" href="images/default-male.png">
+                    <img class="img-circle" width="120" height="130" src="images/default-male.png" data-src="images/default-male.png" />
+                </a>
+                <a data-lightbox="{{ user.name }}_female" ng-show="user.personal_profile.gender == 'Female' && !user.profile_image" data-title="Default female profile picture" href="images/default-female.png">
+                    <img class="img-circle" width="120" height="130" src="images/default-female.png" data-src="images/default-female.png" />
+                </a>
+            </div>
+
+            <div class="panel panel-default col-sm-10">
+                <div class="panel-heading">
+                    <h4 style="display: inline-block">
+                        <span class="info-text" style="font-weight: bold">Meet <a href="{{ '#/userProfile/' + user.id }}">{{ user.name }}</a> from {{ user.personal_profile.hometown }}</span> <br />
+                        <small>
+                            Joined on Roomie
+                            <time am-time-ago="user.personal_profile.created_at" title="{{ user.personal_profile.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>
+                        </small>
+                    </h4>
+
+                    <span class="buttons" style="float: right; margin-right: 10px;">
+                        <!-- button to show complete user profile -->
+                        <button type="button" class="btn btn-default" ng-click="showUserProfile(user.id)">
+                            <i class="fa fa-plus fw"></i>
+                            See more...
+                        </button>
+                    </span>
+                </div>
+
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <i class="flaticon-magnifyingglass29"></i>
+                            <label for="looking_for" class="title">Looking for: </label>
+                            <span id="looking_for" class="info-text">{{ user.roommate_profile.looking_for }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-magnifyingglass29"></i>
+                            <label for="lease_length" class="title">Lease length: </label>
+                            <span id="lease_length" class="info-text">{{ user.roommate_profile.lease_length }} months</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-college1"></i>
+                            <label for="education" class="title">Education: </label>
+                            <span id="education" class="info-text">{{ user.personal_profile.education }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-career1"></i>
+                            <label for="occupation" class="title">Occupation: </label>
+                            <span id="occupation" class="info-text">{{ user.personal_profile.occupation }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="flaticon-archive135"></i>
+                            <label for="workplace" class="title">Workplace: </label>
+                            <span id="workplace" class="info-text">{{ user.personal_profile.workplace }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="flaticon-logistics3"></i>
+                            <label for="move_in_from" class="title">Move in from: </label>
+                            <span id="move_in_from" class="info-text">{{ user.roommate_profile.move_in_from | date:"dd MMMM yyyy" }}</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <i class="flaticon-money132"></i>
+                            <label class="title">Monthly budget: </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="monthly_budget_lower_limit" class="title">From: </label>
+                            <span id="monthly_budget_lower_limit" class="info-text">{{ user.roommate_profile.monthly_budget_lower_limit }}</span>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="monthly_budget_upper_limit" class="title">To: </label>
+                            <span id="monthly_budget_upper_limit" class="info-text">{{ user.roommate_profile.monthly_budget_upper_limit }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-footer" style="margin-top: 20px;">
+
+                        <div class="row">
+                            <div class="col-sm-2">Description:</div>
+                            <div id="description" class="col-sm-7">
+                                <!-- editable field -->
+                                <span class="info-text">{{ user.personal_profile.description.substring(0, 200) }}</span> <span class="info-text" ng-if="user.personal_profile.description.length > 200">. . .</span>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
     </div>
 
-    <!-- LOADING ICON =============================================== -->
-    <!-- show loading icon if the loading variable is set to true -->
-    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-4x fa-spin"></span></p>
-
-    <div class="rentalUnits" ng-hide="loading" ng-repeat="unit in rentalUnits">
-        <h3>Rental Unit #{{ unit.id }} <small>by {{ unit.user_id }}</small></h3>
-        <p>{{ unit.address }}</p>
-    </div>
+    <!-- PAGINATION -->
+    <uib-pagination total-items="pagination.totalItems" items-per-page="pagination.perPage" ng-model="pagination.currentPage" ng-change="getAllUserProfiles()" rotate="true" force-ellipses="true" boundary-link-numbers="true"></uib-pagination>
 
 </div>

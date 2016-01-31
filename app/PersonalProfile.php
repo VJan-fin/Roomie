@@ -29,7 +29,6 @@ class PersonalProfile extends Model
         'workplace',
         'hometown',
         'location',
-        'profile_active',
         'description',
         'image_url'
     ];

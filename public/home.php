@@ -38,21 +38,27 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/customSlider.css" rel="stylesheet">
     <link href="css/propertyViewStyle.css" rel="stylesheet">
+    <link href="css/userViewStyle.css" rel="stylesheet">
 
 </head>
 
 <body ng-app="roomie-app" ng-cloak class="ng-cloak">
 
-<nav class="navbar navbar-default">
+<div class="page-header" style="margin-bottom: 0px; margin-top: 21px; margin-left: 10px">
+    <img src="images/Roomie-logo-white.png" height="123" />
+</div>
+
+<nav class="navbar navbar-default" data-spy="affix" data-offset-top="155">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#/home">WebSiteName</a>
+<!--            <a class="navbar-brand" href="#/home">-->
+<!--                <img src="images/Roomie-logo-white.png" height="30" />-->
+<!--            </a>-->
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="#/home">Home</a></li>
             <li><a href="#/propertyList">Browse Properties</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
+            <li><a href="#/users">Find roommates</a></li>
         </ul>
 
         <ul ng-controller="AuthController" ng-if="authenticated" class="nav navbar-nav navbar-right">
@@ -73,7 +79,7 @@
 </nav>
 
 <!-- Angular routing -->
-<div ui-view></div>
+<div class="mainContent" ui-view></div>
 
 
     <!-- Libraries -->
@@ -129,6 +135,7 @@
     <script src="app/controllers/RoommateProfileController.js"></script>
     <script src="app/controllers/CommentController.js"></script>
     <script src="app/controllers/FileUploadController.js"></script>
+    <script src="app/controllers/UserController.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

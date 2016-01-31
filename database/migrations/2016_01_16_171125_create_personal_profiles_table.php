@@ -30,11 +30,7 @@ class CreatePersonalProfilesTable extends Migration
             $table->string('hometown')->nullable();
             $table->string('location')->nullable();
 
-            // is profile active
-            $table->boolean('profile_active')->default(1);
-
             $table->string('description', 1000)->nullable();
-            $table->string('image_url')->nullable();
 
             $table->timestamps();
         });

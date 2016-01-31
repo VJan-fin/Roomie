@@ -40,7 +40,8 @@ class RentalUnit extends Model
         'elevator',
         'laundry',
         'gym',
-        'doorman'
+        'doorman',
+        'property_active'
     ];
 
     public function user()
