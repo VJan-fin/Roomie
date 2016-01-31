@@ -14,6 +14,11 @@
 <!-- PROPERTY INFORMATION -->
 <div class="container" ng-controller="RentalUnitController">
 
+    <button type="button" class="btn btn-danger" style="float: right" ng-show="authenticated && currentUser.id == property.user_id" ng-click="toggleActivation()">
+        <span ng-show="property.property_active == 1">Hide property</span>
+        <span ng-show="property.property_active == 0">Show property</span>
+    </button>
+
     <h3>
         Property #{{property.id}} <br />
         <small>

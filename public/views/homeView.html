@@ -18,16 +18,63 @@
     }
 </style>
 
-<div class="container">
+<div id="firstSection" class="container">
 
-    <div class="jumbotron text-align" style="background-color: rgba(17, 24, 31, 0.3); color: #DF691A; margin-top: 40px; border-radius: 20px;">
+    <div class="jumbotron text-align" style="background-color: rgba(43, 62, 80, 0.3); color: #DF691A; margin-top: 40px; margin-bottom: 140px; border-radius: 20px;">
         <h1><strong>Find your dream place and your new best friend</strong></h1>
         <p><strong>Join the big Roomie family and find the perfect place to move in with your new great roommate</strong></p>
     </div>
 
 </div>
 
+<div class="well well-lg" style="margin-top: 70px; margin-bottom: 70px;">
 
+    <h1 class="" style="color: #DF691A;">Roomie TIPS</h1>
 
+    <div>
+        <uib-carousel interval="6000" no-wrap="false">
+
+            <uib-slide active="true" index="0">
+                <img ng-src="images/carousel/roommates1.jpg" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4><strong>Tip #1:</strong> Address things when they're little</h4>
+                    <p>Addressing things that bug you while they're still little can help your roommate be aware of something she may not otherwise know.</p>
+                </div>
+            </uib-slide>
+
+            <uib-slide active="false" index="1">
+                <img ng-src="images/carousel/roommates2.jpg" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4><strong>Tip #2:</strong> Respect your roommate's stuff</h4>
+                    <p>Don't borrow, use, or take anything without getting permission first.</p>
+                </div>
+            </uib-slide>
+
+            <uib-slide active="false" index="2">
+                <img ng-src="images/carousel/roommates3.jpg" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4><strong>Tip #3:</strong> Don't forget to hang out</h4>
+                    <p>{{slide.text}}</p>
+                </div>
+            </uib-slide>
+
+            <uib-slide active="false" index="3">
+                <img ng-src="images/carousel/roommates4.jpg" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4><strong>Tip #4:</strong> Be careful of who you bring into your room and how often</h4>
+                    <p>Your roommate is a person, so you should take an interest in each other's lives.</p>
+                </div>
+            </uib-slide>
+
+            <uib-slide active="false" index="4">
+                <img ng-src="images/carousel/roommates5.jpg" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4><strong>Tip #5:</strong> Follow the Golden Rule</h4>
+                    <p>Treat your roommate like you'd like to be treated.</p>
+                </div>
+            </uib-slide>
+
+        </uib-carousel>
+    </div>
 
 </div>

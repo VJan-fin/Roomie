@@ -49,6 +49,30 @@ roomie.controller('PersonalProfileController',
                 $scope.getMyProfile();
             };
 
+            $scope.toggleActivation = function() {
+                $scope.user.profile_active = ($scope.user.profile_active + 1) % 2;
+                $scope.saveMyUser();
+            };
+
+            $scope.saveMyUser = function() {
+
+                if(!$rootScope.currentUser)
+                    return;
+
+                $scope.loading = true;
+
+                ProfileService.saveUser($scope.user).success(function (data) {
+                    $scope.loading = false;
+                    $scope.user = data;
+                    //$scope.profile = data.personal_profile;
+                    //$scope.profilePicture = data.profile_image;
+                    //console.log(data);
+                }).error(function (data) {
+                    console.log(data);
+                    $scope.loading = false;
+                })
+            };
+
             $scope.getMyProfile = function() {
 
                 //if(!$rootScope.currentUser)

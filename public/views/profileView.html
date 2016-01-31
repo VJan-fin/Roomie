@@ -6,6 +6,11 @@
     <img ng-src="{{ profilePicture.location }}" ng-show="profilePicture" style="float: left; margin-right: 15px; border: 2px solid black" class="img-circle" alt="Profile image" width="120" height="130">
 
 
+    <button type="button" class="btn btn-danger" style="float: right" ng-show="authenticated && currentUser.id == profile.for_user" ng-click="toggleActivation()">
+        <span ng-show="user.profile_active == 1">Deactivate account</span>
+        <span ng-show="user.profile_active == 0">Activate account</span>
+    </button>
+
     <h3>
         Meet {{ user.name }} <br />
         <small>Joined Roomie <time am-time-ago="profile.created_at" title="{{ profile.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>

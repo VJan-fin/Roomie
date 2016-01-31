@@ -49,6 +49,16 @@ roomie.factory('ProfileService', function($http, $rootScope) {
                 headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                 data: $.param(profileData)
             });
+        },
+
+        saveUser: function(userData) {
+            return $http({
+                url: 'api/User/' + $rootScope.currentUser.id,
+                method: "PUT",
+                // Necessary to indicate that the sent data is JSON
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                data: $.param(userData)
+            });
         }
 
     }

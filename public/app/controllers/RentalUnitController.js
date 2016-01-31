@@ -45,6 +45,11 @@ roomie.controller('RentalUnitController',
                 $scope.datePicker.isOpen = true;
             };
 
+            $scope.toggleActivation = function() {
+                $scope.property.property_active = ($scope.property.property_active + 1) % 2;
+                $scope.saveRentalUnit();
+            };
+
 
             /**
              * Redirecting to show only the chosen property from the list
