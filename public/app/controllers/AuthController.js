@@ -2,20 +2,27 @@
  * Created by Viktor on 18.01.2016.
  */
 
-roomie.controller('AuthController',
-    ['$scope', '$auth', '$state', '$http', '$rootScope',
+roomie.controller('AuthController', ['$scope', '$auth', '$state', '$http', '$rootScope',
+
         function($scope, $auth, $state, $http, $rootScope)
         {
-            var controller = this;
 
-            controller.loginError = false;
-            controller.loginErrorText = "";
+            $scope.init = function() {
+                $('#loginForm').modal('show');
+            };
 
-            controller.login = function() {
+            $scope.init();
+
+            //var controller = this;
+
+            $scope.loginError = false;
+            $scope.loginErrorText = "";
+
+            $scope.login = function() {
 
                 var credentials = {
-                    email: controller.email,
-                    password: controller.password
+                    email: $scope.email,
+                    password: $scope.password
                 };
 
                 // Use Satellizer's $auth service to login
@@ -28,8 +35,8 @@ roomie.controller('AuthController',
 
                 }, function(error) {
                     // Handle potential errors during login
-                    controller.loginError = true;
-                    controller.loginErrorText = error.data.error;
+                    $scope.loginError = true;
+                    $scope.loginErrorText = error.data.error;
                 }).then(function(response) {
                     // The response from api/authenticate/user
 
@@ -49,8 +56,11 @@ roomie.controller('AuthController',
                     // us to access it anywhere across the app
                     $rootScope.currentUser = response.data.user;
 
+                    $('#loginForm').removeClass('fade').removeClass('show');
+                    $('.modal-backdrop').remove();
+
                     // If login is successful, redirect to the users state
-                    $state.go('users', {});
+                    $state.go('home', {});
                 });
 
             };

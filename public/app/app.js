@@ -7,30 +7,17 @@ var roomie = angular.module('roomie-app', [
     'xeditable',
     'angularMoment',
     'ui.bootstrap'
-
-
-
-  /* 'ui-rangeSlider',
-  'pascalprecht.translate',
-  'smart-table',
-  'mgcrea.ngStrap',
-  'toastr',
-  'ui.select',
-  'ngQuickDate'*/
 ]);
 
-// Loading bar configuration - appears on every API call automatically
-roomie.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-  cfpLoadingBarProvider.spinnerTemplate = '<h4 style="position:fixed; top:45%; left:45%; text-align:center; background-color: #2B3E50;  border: 2px solid #DF691A; padding: 20px;"><i class="fa fa-spinner fa-pulse"></i> <span>Loading . . .</h4>';
-}]);
+roomie.config(function($stateProvider, $urlRouterProvider) {
 
-roomie.config(function($stateProvider) {
+    // Defines a path that is used when an invalid route is requested
+    $urlRouterProvider.otherwise('/home');
 
     $stateProvider
         .state('home', {
             url: '/home',
             templateUrl: 'views/homeView.html'
-            //controller: 'AuthController as auth'
         })
         .state('auth', {
             url: '/auth',
@@ -52,10 +39,14 @@ roomie.config(function($stateProvider) {
         .state('users', {
             url: '/users',
             templateUrl: 'views/userView.html'
-            //controller: 'UserController as user'
         });
 
 });
+
+// Loading bar configuration - appears on every API call automatically
+roomie.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.spinnerTemplate = '<h4 style="position:fixed; top:45%; left:45%; text-align: center; background-color: #2B3E50;  border: 2px solid #DF691A; padding: 20px;"><i class="fa fa-spinner fa-pulse"></i> <span>Loading . . .</h4>';
+}]);
 
 // Authentication configuration
 roomie.config(function($urlRouterProvider, $authProvider) {
@@ -114,6 +105,63 @@ roomie.config(function($urlRouterProvider, $authProvider) {
 });
 
 
+/**
+ * Handling the case where the JWT token is expired
+ */
+roomie.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+
+    function redirectWhenLoggedOut($q, $injector, $rootScope) {
+
+        return {
+
+            responseError: function(rejection) {
+
+                // Need to use $injector.get to bring in $state or else we get
+                // a circular dependency error
+                var $state = $injector.get('$state');
+
+                // Instead of checking for a status code of 400 which might be used
+                // for other reasons in Laravel, we check for the specific rejection
+                // reasons to tell us if we need to redirect to the login state
+                var rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
+
+                // Loop through each rejection reason and redirect to the login
+                // state if one is encountered
+                angular.forEach(rejectionReasons, function(value, key) {
+
+                    if(rejection.data.error === value) {
+
+                        // If we get a rejection corresponding to one of the reasons
+                        // in our array, we know we need to authenticate the user so
+                        // we can remove the current user from local storage
+                        localStorage.removeItem('user');
+
+                        // Flip authenticated to false so that we no longer
+                        // show UI elements dependant on the user being logged in
+                        $rootScope.authenticated = false;
+
+                        // Remove the current user info from rootscope
+                        $rootScope.currentUser = null;
+
+                        // Send the user to the auth state so they can login
+                        $state.go('auth');
+                    }
+                });
+
+                return $q.reject(rejection);
+            }
+        }
+    }
+
+    // Setup for the $httpInterceptor
+    $provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
+
+    // Push the new factory onto the $http interceptor array
+    $httpProvider.interceptors.push('redirectWhenLoggedOut');
+
+});
+
+
 roomie.run(function($rootScope, $state, editableOptions) {
 
     editableOptions.theme = 'bs3'; // bootstrap3 theme
@@ -137,7 +185,7 @@ roomie.run(function($rootScope, $state, editableOptions) {
                 event.preventDefault();
 
                 // go to the "main" state which in our case is users
-                $state.go('users');
+                $state.go('home');
             }
         }
 

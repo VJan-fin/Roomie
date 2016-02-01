@@ -1,14 +1,96 @@
-<div class="col-sm-4 col-sm-offset-4">
-    <div class="well">
-        <h3>Login</h3>
-        <form>
-            <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email" ng-model="auth.email">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" ng-model="auth.password">
-            </div>
-            <button class="btn btn-primary" ng-click="auth.login()">Submit</button>
-        </form>
-    </div>
+<style>
+    .mainContent::before {
+        background: url(images/moving-in.jpg) no-repeat center center;
+        content: '';
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        -webkit-filter: blur(3px);
+        -moz-filter: blur(3px);
+        -o-filter: blur(3px);
+        -ms-filter: blur(3px);
+        filter: blur(3px);
+    }
+
+    button.well {
+        background-color: rgba(43, 62, 80, 0.6);
+        margin-top: 140px;
+        padding: 10px 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    button.well:hover {
+        background-color: rgba(43, 62, 80, 0.8);
+        color: #DF691A;
+        border: 2px solid #DF691A;
+    }
+</style>
+
+<div class="container">
+    <button class="well col-sm-4 col-sm-offset-4" data-toggle="modal" data-target="#loginForm">
+        <h3 style="opacity: 1;">Open login form</h3>
+    </button>
 </div>
+
+<!-- Modal -->
+<form id="loginForm" name="loginForm" class="modal fade" role="dialog" ng-submit="login()" ng-controller="AuthController" novalidate>
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert alert-danger fade-in" ng-show="loginError != 0">
+                    <a href class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> <br />
+                    <div>{{ loginErrorText }}</div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': loginForm.email.$invalid && !loginForm.email.$pristine && loginForm.email.$touched }">
+                    <label for="loginEmail" class="title">E-mail:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-at fa-fw"></i></span>
+                        <input id="loginEmail" name="email" type="email" class="form-control" placeholder="Email" ng-model="email" required>
+                    </div>
+                    <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine && loginForm.email.$touched" class="text-danger"><small>Enter a valid email.</small></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword" class="title">Password:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <input id="loginPassword" name="password" type="password" class="form-control" placeholder="Password" ng-model="password" required>
+                    </div>
+                    <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine && loginForm.password.$touched" class="text-danger"><small>You must enter a password.</small></p>
+                </div>
+
+                <hr>
+
+                <p class="text-center">
+                    <small>Don't have an account yet? <a href="#/signup">Sign up</a></small>
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login to account</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+
+    </div>
+</form>
