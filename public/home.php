@@ -30,7 +30,7 @@
     <link href='css/loading-bar.css' rel='stylesheet' type='text/css' media='all'>
 <!--    <link href="css/xeditable.css" rel='stylesheet' type='text/css'>-->
     <link href="css/flaticon.css" rel='stylesheet'>
-<!--    <link href="css/angular.rangeSlider.css">-->
+    <link href="css/angular.rangeSlider.css">
 <!--    <link href="css/finalTilesGallery.css" rel="stylesheet">-->
     <link href="css/lightbox.css" rel="stylesheet">
 
@@ -65,14 +65,15 @@
             <li class="dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user fa-lg fa-fw"></i>Welcome, {{currentUser.name}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ '#/userProfile/' + currentUser.id }}">My Profile</a></li>
+                    <li ng-show="currentUser.registration_status == 'complete'"><a href="{{ '#/userProfile/' + currentUser.id }}">My Profile</a></li>
+                    <li ng-show="currentUser.registration_status != 'complete'"><a href="#/completeProfile">Complete Profile</a></li>
                     <li ng-click="logout()"><a href>Logout</a></li>
                 </ul>
             </li>
         </ul>
 
         <ul ng-if="!authenticated" class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="#/auth"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>
@@ -103,10 +104,10 @@
     <script src="app/libraries/ui-bootstrap-tpls-1.1.0.min.js"></script>
     <!-- Editable form elements -->
     <script src="app/libraries/xeditable.js"></script>
-<!--    <script src="app/libraries/angular.rangeSlider.js"></script>-->
-    <script src="app/libraries/freewall.js"></script>
-    <script src="app/libraries/jquery.mosaicflow.js"></script>
+    <script src="app/libraries/angular.rangeSlider.js"></script>
     <script src="app/libraries/lightbox.js"></script>
+    <script src="app/libraries/vendor.js"></script>
+    <script src="app/libraries/ng-password-strength.min.js"></script>
 
 
     <!-- load momentJS (required for angular-moment) -->
@@ -136,6 +137,7 @@
     <script src="app/controllers/CommentController.js"></script>
     <script src="app/controllers/FileUploadController.js"></script>
     <script src="app/controllers/UserController.js"></script>
+    <script src="app/controllers/RegistrationController.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

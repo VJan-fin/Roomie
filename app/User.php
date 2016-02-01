@@ -35,7 +35,7 @@ class User extends Model implements AuthenticatableContract,
         'password',
         'roles',
         'profile_active',
-        'registration_complete'
+        'registration_status'
     ];
 
     /**

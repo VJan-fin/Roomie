@@ -59,7 +59,7 @@ roomie.controller('AuthController', ['$scope', '$auth', '$state', '$http', '$roo
                     $('#loginForm').removeClass('fade').removeClass('show');
                     $('.modal-backdrop').remove();
 
-                    // If login is successful, redirect to the users state
+                    // If login is successful, redirect to the homepage
                     $state.go('home', {});
                 });
 
@@ -81,6 +81,8 @@ roomie.controller('AuthController', ['$scope', '$auth', '$state', '$http', '$roo
                     // Remove the current user info from rootscope
                     $rootScope.currentUser = null;
 
+                    // If logout is successful, redirect to the homepage
+                    $state.go('home', {});
                 });
 
             };

@@ -52,7 +52,10 @@ class PersonalProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profile = new PersonalProfile();
+        $profile->fill(Input::all());
+        $profile->save();
+        return Response::json($profile);
     }
 
     /**

@@ -6,7 +6,9 @@ var roomie = angular.module('roomie-app', [
     'satellizer',
     'xeditable',
     'angularMoment',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngPasswordStrength',
+    'ui-rangeSlider'
 ]);
 
 roomie.config(function($stateProvider, $urlRouterProvider) {
@@ -23,6 +25,14 @@ roomie.config(function($stateProvider, $urlRouterProvider) {
             url: '/auth',
             templateUrl: 'views/authView.html',
             controller: 'AuthController as auth'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/registrationView.html'
+        })
+        .state('completeProfile', {
+            url: '/completeProfile',
+            templateUrl: 'views/newProfileView.html'
         })
         .state('userProfile', {
             url: '/userProfile/{id}',
@@ -54,6 +64,9 @@ roomie.config(function($urlRouterProvider, $authProvider) {
     // Satellizer configuration that specifies which API
     // route the JWT should be retrieved from
     $authProvider.loginUrl = 'roomie/public/api/authenticate';
+    $authProvider.signupUrl = 'roomie/public/api/User';
+    // Automatic login after signing up
+    $authProvider.loginOnSignup = true;
 
     $authProvider.facebook({
         clientId: 'Facebook App ID'

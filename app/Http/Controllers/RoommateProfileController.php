@@ -49,7 +49,10 @@ class RoommateProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profile = new RoommateProfile();
+        $profile->fill(Input::all());
+        $profile->save();
+        return Response::json($profile);
     }
 
     /**

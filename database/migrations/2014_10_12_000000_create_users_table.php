@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             // is profile active
             $table->boolean('profile_active')->default(1);
             // has the user created all the mandatory profiles
-            $table->boolean('registration_complete')->default(0);
+            $table->enum('registration_status', ['personal', 'roommate', 'complete'])->default('personal');
 
             $table->rememberToken();
             $table->timestamps();

@@ -7,11 +7,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        // Apply the jwt.auth middleware to all methods in this controller
+        // except for the authenticate method. We don't want to prevent
+        // the user from retrieving their token if they don't already have it
+        $this->middleware('jwt.auth', ['except' => ['index', 'show', 'store']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Response::json(User::with('PersonalProfile')->with('RoommateProfile')->with('ProfileImage')->where('profile_active', 1)->orderBy('created_at', 'desc')->paginate(2));
+        return Response::json(User::with('PersonalProfile')->with('RoommateProfile')->with('ProfileImage')->where('profile_active', 1)->where('registration_complete', 1)->orderBy('created_at', 'desc')->paginate(2));
     }
 
     /**
@@ -40,7 +49,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->fill(Input::all());
+        $user->password = Hash::make($user->password);
+        $user->save();
+        return Response::json($user);
     }
 
     /**

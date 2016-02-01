@@ -75,8 +75,8 @@ roomie.controller('PersonalProfileController',
 
             $scope.getMyProfile = function() {
 
-                //if(!$rootScope.currentUser)
-                //    return;
+                if(!$stateParams.id)
+                    return;
 
                 $scope.loading = true;
 
@@ -105,6 +105,33 @@ roomie.controller('PersonalProfileController',
 
                 ProfileService.saveMyPersonalProfile($scope.profile).success(function (data) {
                     $scope.loading = false;
+                    $scope.profile = data;
+                    console.log(data);
+                }).error(function (data) {
+                    console.log(data);
+                    $scope.loading = false;
+                })
+            };
+
+
+            $scope.createProfile = function() {
+                if(!$rootScope.currentUser)
+                    return;
+
+                $scope.loading = true;
+                $scope.profile.for_user = $rootScope.currentUser.id;
+
+                ProfileService.createMyPersonalProfile($scope.profile).success(function (data) {
+                    $scope.loading = false;
+
+                    var tmpUser = $rootScope.currentUser;
+                    tmpUser.registration_status = 'roommate';
+                    ProfileService.saveUser(tmpUser).success(function (data) {
+                        console.log(data);
+                        localStorage.setItem('user', JSON.stringify(data));
+                        $rootScope.currentUser = data;
+                    });
+
                     $scope.profile = data;
                     console.log(data);
                 }).error(function (data) {

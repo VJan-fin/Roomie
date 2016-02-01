@@ -1,0 +1,120 @@
+<style>
+    .mainContent::before {
+        background: url(images/cooking-together.jpg) no-repeat center center;
+        content: '';
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        -webkit-filter: blur(3px);
+        -moz-filter: blur(3px);
+        -o-filter: blur(3px);
+        -ms-filter: blur(3px);
+        filter: blur(3px);
+    }
+
+    button.well {
+        background-color: rgba(43, 62, 80, 0.6);
+        margin-top: 140px;
+        padding: 10px 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    button.well:hover {
+        background-color: rgba(43, 62, 80, 0.8);
+        color: #DF691A;
+        border: 2px solid #DF691A;
+    }
+</style>
+
+<div class="container">
+    <button class="well col-sm-4 col-sm-offset-4" data-toggle="modal" data-target="#registrationForm">
+        <h3 style="opacity: 1;">Open registration form</h3>
+    </button>
+</div>
+
+<!-- Modal -->
+<form id="registrationForm" name="registrationForm" class="modal fade" role="dialog" ng-submit="register()" ng-controller="RegistrationController" novalidate>
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign up</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert alert-danger fade-in" ng-show="registrationError != 0">
+                    <a href class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> <br />
+                    <div>{{ registrationErrorText }}</div>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': registrationForm.name.$invalid && !registrationForm.name.$pristine && registrationForm.name.$touched }">
+                    <label for="name" class="title">Name:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                        <input id="name" name="name" type="text" class="form-control" placeholder="Name" ng-model="name" required>
+                    </div>
+                    <p ng-show="registrationForm.name.$invalid && !registrationForm.name.$pristine && registrationForm.name.$touched" class="text-danger"><small>Please enter your name.</small></p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': registrationForm.email.$invalid && !registrationForm.email.$pristine && registrationForm.email.$touched }">
+                    <label for="registrationEmail" class="title">E-mail:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-at fa-fw"></i></span>
+                        <input id="registrationEmail" name="email" type="email" class="form-control" placeholder="Email" ng-model="email" required>
+                    </div>
+                    <p ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine && registrationForm.email.$touched" class="text-danger"><small>Enter a valid email.</small></p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': (registrationForm.password.$invalid && !registrationForm.password.$pristine && registrationForm.password.$touched) || (registrationForm.password.$touched && passStrength < 50) }">
+                    <label for="registrationPassword" class="title">Password:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <input id="registrationPassword" name="password" type="password" class="form-control" placeholder="Password" ng-model="password" required>
+                    </div>
+                    <p ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine && registrationForm.password.$touched" class="text-danger"><small>You must enter a password.</small></p>
+                    <p ng-show="registrationForm.password.$touched && passStrength < 50" class="text-danger"><small>The password is not strong enough.</small></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="title">Password strength: <strong>{{ passStrength }}%</strong></label>
+                    <div ng-password-strength="password" strength="passStrength" inner-class="progress-bar" inner-class-prefix="progress-bar-"></div>
+                </label>
+
+                <div class="form-group" ng-class="{ 'has-error': registrationForm.confirmPassword.$touched && password != confirmPassword }">
+                    <label for="confirmPassword" class="title">Confirm password:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="Retype password" ng-model="confirmPassword" required>
+                    </div>
+                    <p ng-show="registrationForm.confirmPassword.$touched && password !== confirmPassword" class="text-danger"><small>The repeated password must match the original one.</small></p>
+                </div>
+
+                <hr>
+
+                <p class="text-center">
+                    <small>You already have an account? <a href="#/auth">Login</a></small>
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" ng-disabled="registrationForm.$invalid || password !== confirmPassword || passStrength < 50">Create profile</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+
+    </div>
+</form>
