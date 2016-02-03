@@ -30,8 +30,9 @@
     <link href='css/loading-bar.css' rel='stylesheet' type='text/css' media='all'>
 <!--    <link href="css/xeditable.css" rel='stylesheet' type='text/css'>-->
     <link href="css/flaticon.css" rel='stylesheet'>
-    <link href="css/angular.rangeSlider.css">
+<!--    <link href="css/angular.rangeSlider.css">-->
 <!--    <link href="css/finalTilesGallery.css" rel="stylesheet">-->
+    <link href="css/rzslider.min.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -104,7 +105,8 @@
     <script src="app/libraries/ui-bootstrap-tpls-1.1.0.min.js"></script>
     <!-- Editable form elements -->
     <script src="app/libraries/xeditable.js"></script>
-    <script src="app/libraries/angular.rangeSlider.js"></script>
+    <script src="app/libraries/rzslider.min.js"></script>
+<!--    <script src="app/libraries/angular.rangeSlider.js"></script>-->
     <script src="app/libraries/lightbox.js"></script>
     <script src="app/libraries/vendor.js"></script>
     <script src="app/libraries/ng-password-strength.min.js"></script>

@@ -7,8 +7,19 @@ roomie.controller('RoommateProfileController',
 
         function($scope, $http, $rootScope, $filter, $stateParams, ProfileService)
         {
-            $scope.profile = {};
+            $scope.profile = {
+                cleanliness: 0,
+                work_schedule: 0,
+                sleep_schedule: 0,
+                smoking: 0,
+                drinking: 0,
+                privacy: 0,
+                guests: 0,
+                eating_habits: 0,
+                pets: 0
+            };
             $scope.maxValue = 5;
+            $scope.minValue = 0;
 
             $scope.datePicker = {
                 isOpen: false,
@@ -86,6 +97,7 @@ roomie.controller('RoommateProfileController',
 
                 $scope.loading = true;
                 $scope.profile.for_user = $rootScope.currentUser.id;
+                $scope.profile.move_in_from = $scope.profile.move_in_from.toISOString().slice(0, 10);
 
                 ProfileService.createMyRoommateProfile($scope.profile).success(function (data) {
                     $scope.loading = false;
@@ -100,6 +112,8 @@ roomie.controller('RoommateProfileController',
 
                     $scope.profile = data;
                     console.log(data);
+
+                    $state.go('home');
                 }).error(function (data) {
                     console.log(data);
                     $scope.loading = false;

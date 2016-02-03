@@ -8,7 +8,7 @@ var roomie = angular.module('roomie-app', [
     'angularMoment',
     'ui.bootstrap',
     'ngPasswordStrength',
-    'ui-rangeSlider'
+    'rzModule'
 ]);
 
 roomie.config(function($stateProvider, $urlRouterProvider) {

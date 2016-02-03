@@ -1,3 +1,20 @@
+<style>
+    span.rz-pointer {
+        background-color: #DF691A;
+    }
+    rzslider .rz-pointer.rz-active:after {
+        background-color: white;
+    }
+    span.rz-bubble, span.rz-bubble.rz-limit {
+        color: white;
+    }
+    rzslider .rz-bar.rz-selection {
+        background-color: #b45a1a;
+    }
+    rzslider .tick.ng-scope.selected {
+        background-color: #b45a1a;
+    }
+</style>
 
 <!-- PERSONAL INFORMATION PROFILE -->
 <div class="container" ng-show="currentUser.registration_status == 'personal'" ng-controller="PersonalProfileController" novalidate>
@@ -29,10 +46,11 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error': profileForm.hometown.$invalid && !profileForm.hometown.$pristine && profileForm.hometown.$touched }">
                                 <i class="flaticon-home78"></i>
                                 <label for="hometown" class="title">Hometown: </label> <br />
-                                <input class="form-control" type="text" id="hometown" name="hometown" ng-model="profile.hometown" />
+                                <input class="form-control" type="text" id="hometown" name="hometown" ng-model="profile.hometown" required />
+                                <p ng-show="profileForm.hometown.$invalid && !profileForm.hometown.$pristine && profileForm.hometown.$touched" class="text-danger"><small>Please enter your hometown.</small></p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +121,7 @@
                     </div>
 
                     <div class="buttons" style="margin-top: 20px;">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="profileForm.$invalid">Save changes</button>
                     </div>
 
                 </div>
@@ -128,58 +146,65 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="flaticon-magnifyingglass29"></i>
-                            <!-- editable field -->
-                            <label style="margin-left: 3px" for="looking_for" class="title">Looking for: </label>
-                            <span id="looking_for" editable-select="profile.looking_for" ng-show="!profileForm.$visible" e-name="looking_for" e-ng-options="g.value as g.text for g in goals" e-required>{{ showGoal(profile) }}</span>
+                            <div class="form-group">
+                                <i class="flaticon-magnifyingglass29"></i>
+                                <label style="margin-left: 3px" for="relationship_status" class="title">Looking for: </label> <br />
+                                <select class="form-control" name="looking_for" id="looking_for" ng-init="profile.looking_for = goals[0].value" ng-model="profile.looking_for">
+                                    <option ng-repeat="g in goals" value="{{ g.value }}">{{ g.text }}</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-sm-2"></div>
                         <div class="col-sm-4">
-                            <i class="flaticon-sign20"></i>
-                            <!-- editable field -->
-                            <label for="lease_length" class="title">Lease length (in months): </label>
-                            <span id="lease_length" editable-number="profile.lease_length" ng-show="!profileForm.$visible" e-name="lease_length" e-min="1" e-required>{{ profile.lease_length || '--unknown--' }}</span>
+                            <div class="form-group">
+                                <i class="flaticon-archive135"></i>
+                                <label for="lease_length" class="title">Lease length (in months): </label> <br />
+                                <input class="form-control" type="number" min="1" step="1" id="lease_length" name="lease_length" ng-init="profile.lease_length = 1" ng-model="profile.lease_length" />
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <i class="flaticon-money132"></i>
-                            <!-- editable field -->
-                            <label style="margin-left: 3px" class="title">Monthly budget: </label>
+                            <div class="form-group">
+                                <i class="flaticon-money132"></i>
+                                <label style="margin-left: 3px" class="title">Monthly budget: </label>
+                            </div>
                         </div>
                         <div class="col-sm-2"></div>
                         <div class="col-sm-3">
-                            <i class="flaticon-logistics3"></i>
-                            <!-- editable field -->
-                            <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label>
-                            <span id="move_in_from" editable-bsdate="profile.move_in_from" e-uib-datepicker-popup="dd/MM/yyyy" ng-show="!profileForm.$visible" e-is-open="datePicker.isOpen" e-min-date="datePicker.minDate" e-required>
-                                {{ (profile.move_in_from | date:"dd MMMM yyyy") || 'empty' }}
-                            </span>
+                            <div class="form-group">
+                                <i class="flaticon-logistics3"></i>
+                                <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label> <br />
+                                <input type="text" id="move_in_from" name="move_in_from" uib-datepicker-popup="dd/MM/yyyy" ng-model="profile.move_in_from" min-date="datePicker.minDate" is-open="datePicker.isOpen"
+                                       ng-class="{ 'has-error': profileForm.move_in_from.$invalid && !profileForm.move_in_from.$pristine && profileForm.move_in_from.$touched }" required />
+                                <p ng-show="profileForm.move_in_from.$invalid && !profileForm.move_in_from.$pristine && profileForm.move_in_from.$touched" class="text-danger"><small>Please choose a valid date.</small></p>
+                            </div>
                         </div>
                         <div class="col-sm-1">
-                            <button type="button" class="btn btn-default" ng-show="profileForm.$visible" ng-click="openPopUp()">
+                            <button type="button" class="btn btn-default" ng-click="openPopUp()">
                                 <i class="fa fa-calendar fw"></i>
                             </button>
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="col-sm-1"></div>
                         <div class="col-sm-2">
-                            <label for="monthly_budget_lower_limit" class="title">From: </label>
-                            <span id="monthly_budget_lower_limit" editable-text="profile.monthly_budget_lower_limit" ng-show="!profileForm.$visible" e-name="monthly_budget_lower_limit" e-required>{{ profile.monthly_budget_lower_limit || '--unknown--' }}</span>
+                            <div class="form-group">
+                                <label for="monthly_budget_lower_limit" class="title">From: </label> <br />
+                                <input class="form-control" type="number" min="100" step="10" id="monthly_budget_lower_limit" name="monthly_budget_lower_limit" ng-init="profile.monthly_budget_lower_limit = 100" ng-model="profile.monthly_budget_lower_limit" />
+                            </div>
                         </div>
                         <div class="col-sm-2">
-                            <label for="monthly_budget_upper_limit" class="title">To: </label>
-                            <span id="monthly_budget_upper_limit" editable-text="profile.monthly_budget_upper_limit" ng-show="!profileForm.$visible" e-name="monthly_budget_upper_limit" e-required>{{ profile.monthly_budget_upper_limit || '--unknown--' }}</span>
+                            <div class="form-group">
+                                <label for="monthly_budget_upper_limit" class="title">To: </label> <br />
+                                <input class="form-control" type="number" min="100" step="10" id="monthly_budget_upper_limit" name="monthly_budget_upper_limit" ng-init="profile.monthly_budget_upper_limit = 100" ng-model="profile.monthly_budget_upper_limit" />
+                            </div>
                         </div>
                     </div>
 
                     <div class="panel-footer" style="margin-top: 20px;">
-                        <!--<div class="row">-->
-                        <!--<div class="col-sm-2">More about my habits!</div>-->
-                        <!--</div>-->
 
                         <div class="row">
                             <div class="col-sm-2"><label>Messy</label></div>
@@ -194,31 +219,18 @@
 
                         <div class="row" >
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.cleanliness" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.cleanliness / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.cleanliness }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.cleanliness" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.work_schedule" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.work_schedule / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.work_schedule }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.work_schedule" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.sleep_schedule" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.sleep_schedule / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.sleep_schedule }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.sleep_schedule" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                         </div>
 
+
+                        <div class="row" style="margin: 15px 0px"></div>
 
                         <div class="row">
                             <div class="col-sm-2"><label>Non-smoker</label></div>
@@ -233,31 +245,18 @@
 
                         <div class="row" >
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.smoking" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.smoking / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.smoking }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.smoking" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.drinking" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.drinking / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.drinking }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.drinking" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.eating_habits" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.eating_habits / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.eating_habits }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.eating_habits" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                         </div>
 
+
+                        <div class="row" style="margin: 15px 0px"></div>
 
                         <div class="row">
                             <div class="col-sm-2"><label>Very strict</label></div>
@@ -270,30 +269,15 @@
                             <div class="col-sm-2 text-right"><label>Animal person</label></div>
                         </div>
 
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.privacy" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.privacy / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.privacy }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.privacy" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.guests" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.guests / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.guests }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.guests" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                             <div class="col-sm-4">
-                                <div class="progress" ng-show="!profileForm.$visible" editable-range="profile.pets" e-min="0" e-max="{{maxValue}}" e-step="1">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                         aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" ng-style="{width: ( profile.pets / maxValue * 100 + '%' ) }">
-                                        <span>{{ profile.pets }} / {{ maxValue }}</span>
-                                    </div>
-                                </div>
+                                <rzslider rz-slider-model="profile.pets" rz-slider-options="{ floor: minValue, ceil: maxValue, step: 1, showSelectionBar: true, showTicks: true }"></rzslider>
                             </div>
                         </div>
 
@@ -320,14 +304,16 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-4">
-                                <!-- editable field -->
-                                <span id="hobbies" editable-textarea="profile.hobbies" e-rows="3" e-cols="50" ng-show="!profileForm.$visible" e-name="hobbies">{{ profile.hobbies || '--unknown--' }}</span>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="hobbies" id="hobbies" ng-model="profile.hobbies" rows="3" cols="50"></textarea>
+                                </div>
                             </div>
 
                             <div class="col-sm-2"></div>
                             <div class="col-sm-4">
-                                <!-- editable field -->
-                                <span id="exercise" editable-textarea="profile.exercise" e-rows="3" e-cols="50" ng-show="!profileForm.$visible" e-name="exercise">{{ profile.exercise || '--unknown--' }}</span>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="exercise" id="exercise" ng-model="profile.exercise" rows="3" cols="50"></textarea>
+                                </div>
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
@@ -336,7 +322,7 @@
 
                     <div class="buttons" style="margin-top: 20px;">
                         <!-- button to submit form -->
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="profileForm.$invalid">Save changes</button>
                     </div>
 
                 </div>
