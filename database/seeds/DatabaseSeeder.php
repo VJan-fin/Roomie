@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call('RoommateProfilesTableSeeder');
         $this->call('RentalUnitsTableSeeder');
         $this->call('CommentsTableSeeder');
+        $this->call('RatingsTableSeeder');
 
         Model::reguard();
     }

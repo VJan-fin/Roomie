@@ -10,7 +10,12 @@
             <div class="panel panel-default propertyUnitBlock" ng-repeat="property in rentalUnits">
                 <div class="panel-heading">
                     <h4 style="display: inline-block">
-                        <span class="info-text" style="font-weight: bold"><a href="{{ '#/propertyPage/' + property.id }}">Property #{{property.id}}</a></span> <br />
+                        <span class="info-text" style="font-weight: bold"><a href="{{ '#/propertyPage/' + property.id }}">Property #{{property.id}}</a></span>
+
+                        <span style="margin-left: 15px" ng-controller="RatingController" ng-init="getRatingById(property.id)">
+                            <uib-rating ng-model="rating" max="5" on-hover="hoveringOver(value)" readonly="true" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></uib-rating> <br/>
+                        </span>
+
                         <small>
                             Posted on Roomie
                             <time am-time-ago="property.created_at" title="{{ property.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time>

@@ -54,6 +54,11 @@ class RentalUnit extends Model
         return $this->hasMany('App\Comment', 'on_rental');
     }
 
+    public function ratings()
+    {
+        return $this->hasMany('App\Rating', 'on_rental');
+    }
+
     public function propertyPicture()
     {
         return $this->hasMany('App\PropertyPicture', 'on_rental');

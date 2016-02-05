@@ -7,17 +7,22 @@
         width: auto;
         height: 100%;
     }
-
 </style>
 
 
 <!-- PROPERTY INFORMATION -->
 <div class="container" ng-controller="RentalUnitController">
 
-    <button type="button" class="btn btn-danger" style="float: right" ng-show="authenticated && currentUser.id == property.user_id" ng-click="toggleActivation()">
-        <span ng-show="property.property_active == 1">Hide property</span>
-        <span ng-show="property.property_active == 0">Show property</span>
-    </button>
+    <div style="float: right; clear: both;" ng-controller="RatingController" ng-init="init()">
+        <div>
+            <label class="title"></label> <h3 style="display: inline; color: #DF691A"><small>Rating:</small> {{ (rating | number: 2) || (0 | number: 2) }}<small style="color: #DF691A">/5.00</small></h3> <br/>
+        </div>
+
+        <div style="margin-top: 15px" ng-show="authenticated">
+            <uib-rating ng-model="myRating.rating_points" max="5" on-hover="hoveringOver(value)" ng-click="starClick()" on-leave="overStar = null" state-on="'fa fa-star fa-2x'" state-off="'fa fa-star-o fa-2x'"></uib-rating> <br/>
+            <span class="pull-right" style="margin-right: 15px; margin-top: 10px; padding: 5px 10px; border-radius: 3px" class="label" ng-class="{ 'label-danger': overStar < 3, 'label-info': overStar == 3, 'label-success': overStar > 3 }" ng-show="overStar">{{ overStar }}/5</span>
+        </div>
+    </div>
 
     <h3>
         Property #{{property.id}} <br />
@@ -27,6 +32,11 @@
             by <a href="{{ '#/userProfile/' + property.user.id }}">{{ property.user.name }}</a>
         </small>
     </h3>
+
+    <button type="button" class="btn btn-danger" style="margin-bottom: 10px" ng-show="authenticated && currentUser.id == property.user_id" ng-click="toggleActivation()">
+        <span ng-show="property.property_active == 1">Hide property</span>
+        <span ng-show="property.property_active == 0">Show property</span>
+    </button>
 
 
     <!-- UPLOAD PROPERTY PICTURE -->

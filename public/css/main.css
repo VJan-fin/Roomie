@@ -21,3 +21,11 @@ output.ng-binding {
     width: 70%;
     margin: auto;
 }
+
+i.fa-star {
+    color: gold;
+}
+
+i.fa-star-o {
+    color: gold;
+}

@@ -26,17 +26,18 @@ Route::model('RentalUnit', 'App\RentalUnit');
 Route::model('Comment', 'App\Comment');
 
 // API ROUTES ==================================
-// TODO: Enable only the necessary API functions. Create and edit are not needed since Angular handlees the views
+// TODO: Enable only the necessary API functions. Create and edit are not needed since Angular handles the views
 Route::group(array('prefix' => 'api'), function() {
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
     Route::resource('User', 'UserController');
+    Route::resource('User.ProfileImage', 'ProfileImageController');
     Route::resource('PersonalProfile', 'PersonalProfileController');
     Route::resource('RoommateProfile', 'RoommateProfileController');
     Route::resource('RentalUnit', 'RentalUnitController');
     Route::resource('RentalUnit.Comment', 'CommentController');
-    Route::resource('User.ProfileImage', 'ProfileImageController');
+    Route::resource('RentalUnit.User', 'RatingController');
     Route::resource('RentalUnit.PropertyPicture', 'PropertyPictureController');
 });
 
