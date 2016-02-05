@@ -3,9 +3,9 @@
  */
 
 roomie.controller('RentalUnitController',
-    ['$scope', '$http', '$rootScope', '$filter', '$stateParams', '$location', 'RentalUnitService',
+    ['$scope', '$http', '$state', '$rootScope', '$filter', '$stateParams', '$location', 'RentalUnitService',
 
-        function($scope, $http, $rootScope, $filter, $stateParams, $location, RentalUnitService)
+        function($scope, $http, $state, $rootScope, $filter, $stateParams, $location, RentalUnitService)
         {
             $scope.rentalUnits = [];
             $scope.property = {};
@@ -143,6 +143,26 @@ roomie.controller('RentalUnitController',
                 RentalUnitService.saveProperty($scope.property).success(function (data) {
                     $scope.loading = false;
                     $scope.getSingleRentalUnit();
+                    //$scope.property = data;
+                    //console.log(data);
+                }).error(function (data) {
+                    console.log(data);
+                    $scope.loading = false;
+                })
+            };
+
+            $scope.createProperty = function() {
+                if(!$rootScope.currentUser)
+                    return;
+
+                $scope.loading = true;
+                $scope.property.user_id = $rootScope.currentUser.id;
+                $scope.property.move_in_from = $scope.property.move_in_from.toISOString().slice(0, 10);
+
+                RentalUnitService.createNewProperty($scope.property).success(function (data) {
+                    $scope.loading = false;
+                    $state.go('propertyPage', { id: data.id });
+                    //$scope.getSingleRentalUnit();
                     //$scope.property = data;
                     //console.log(data);
                 }).error(function (data) {

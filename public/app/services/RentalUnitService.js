@@ -33,6 +33,16 @@ roomie.factory('RentalUnitService', function($http) {
                 headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                 data: $.param(rental_unit)
             });
+        },
+
+        createNewProperty: function(propertyData) {
+            return $http({
+                url: 'api/RentalUnit',
+                method: "POST",
+                // Necessary to indicate that the sent data is JSON
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                data: $.param(propertyData)
+            });
         }
 
     }

@@ -1,0 +1,213 @@
+<!-- PROPERTY INFORMATION -->
+<div class="container" ng-controller="RentalUnitController">
+
+    <h3>Add a new property to rent</h3>
+
+
+    <!-- PROPERTY DETAILS-->
+    <div class="panel-group" style="margin-top: 40px">
+        <form name="propertyForm" ng-submit="createProperty()">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="display: inline-block">Property Details</h4>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-home78"></i>
+                                <label style="margin-left: 3px" for="type" class="title">Property type: </label> <br />
+                                <select class="form-control" name="type" id="type" ng-init="property.type = types[0].value" ng-model="property.type">
+                                    <option ng-repeat="t in types" value="{{ t.value }}">{{ t.text }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-sign20"></i>
+                                <label for="lease_length" class="title">Lease length (in months): </label> <br />
+                                <input class="form-control" type="number" min="1" step="1" id="lease_length" name="lease_length" ng-init="property.lease_length = 1" ng-model="property.lease_length" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-money132"></i>
+                                <label style="margin-left: 3px" for="rent" class="title">Monthly rent: </label> <br />
+                                <input class="form-control" type="number" min="100" step="10" id="rent" name="rent" ng-init="property.rent = 100" ng-model="property.rent" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-cocktail17"></i>
+                                <label style="margin-left: 3px" for="class" class="title">Property class: </label> <br />
+                                <select class="form-control" name="class" id="class" ng-init="property.class = classes[0].value" ng-model="property.class">
+                                    <option ng-repeat="c in classes" value="{{ c.value }}">{{ c.text }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <i class="flaticon-logistics3"></i>
+                                <label style="margin-left: 3px" for="move_in_from" class="title">Move in from: </label> <br />
+                                <input type="text" id="move_in_from" name="move_in_from" uib-datepicker-popup="dd/MM/yyyy" ng-model="property.move_in_from" min-date="datePicker.minDate" is-open="datePicker.isOpen"
+                                       ng-class="{ 'has-error': propertyForm.move_in_from.$invalid && !propertyForm.move_in_from.$pristine && propertyForm.move_in_from.$touched }" required />
+                                <p ng-show="propertyForm.move_in_from.$invalid && !propertyForm.move_in_from.$pristine && propertyForm.move_in_from.$touched" class="text-danger"><small>Please choose a valid date.</small></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="button" class="btn btn-default" ng-click="openPopUp()">
+                                <i class="fa fa-calendar fw"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-beds12"></i>
+                                <label for="num_bedrooms" class="title">Number of bedrooms: </label> <br />
+                                <input class="form-control" type="number" min="0" step="1" id="num_bedrooms" name="num_bedrooms" ng-init="property.num_bedrooms = 0" ng-model="property.num_bedrooms" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-beds12"></i>
+                                <label for="num_bathrooms" class="title">Number of bathrooms: </label> <br />
+                                <input class="form-control" type="number" min="0" step="1" id="num_bathrooms" name="num_bathrooms" ng-init="property.num_bathrooms = 0" ng-model="property.num_bathrooms" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-luxury6"></i>
+                                <label style="margin-left: 3px" for="furniture" class="title">Furniture: </label> <br />
+                                <select class="form-control" name="furniture" id="furniture" ng-init="property.furniture = furnished[0].value" ng-model="property.furniture">
+                                    <option ng-repeat="f in furnished" value="{{ f.value }}">{{ f.text }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-building210"></i>
+                                <label for="city" class="title">City: </label> <br />
+                                <input class="form-control" type="text" id="city" name="city" ng-model="property.city"
+                                       ng-class="{ 'has-error': propertyForm.city.$invalid && !propertyForm.city.$pristine && propertyForm.city.$touched }" required />
+                                <p ng-show="propertyForm.city.$invalid && !propertyForm.city.$pristine && propertyForm.city.$touched" class="text-danger"><small>Please enter the city.</small></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <i class="flaticon-location73"></i>
+                                <label for="city" class="title">Address: </label> <br />
+                                <input class="form-control" type="text" id="address" name="address" ng-model="property.address"
+                                       ng-class="{ 'has-error': propertyForm.address.$invalid && !propertyForm.address.$pristine && propertyForm.address.$touched }" required />
+                                <p ng-show="propertyForm.address.$invalid && !propertyForm.address.$pristine && propertyForm.address.$touched" class="text-danger"><small>Please enter the address.</small></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-footer" style="margin-top: 20px;">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.wifi" ng-true-value="1" ng-false-value="0" />
+                                    <span>Wi-Fi</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.air_conditioning" ng-true-value="1" ng-false-value="0" />
+                                    <span>Air-conditioning</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.cable" ng-true-value="1" ng-false-value="0" />
+                                    <span>Cable TV</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.satellite" ng-true-value="1" ng-false-value="0" />
+                                    <span>Satellite TV</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.elevator" ng-true-value="1" ng-false-value="0" />
+                                    <span>Elevator</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.laundry" ng-true-value="1" ng-false-value="0" />
+                                    <span>Laundry room</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.gym" ng-true-value="1" ng-false-value="0" />
+                                    <span>Gym</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.doorman" ng-true-value="1" ng-false-value="0" />
+                                    <span>Doorman</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.pets" ng-true-value="1" ng-false-value="0" />
+                                    <span>Pets</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="property.private_bathroom" ng-true-value="1" ng-false-value="0" />
+                                    <span>Private bathroom</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="propertyDescription" class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">Description:</div>
+                        <div id="description" class="col-sm-6">
+                            <div class="form-group">
+                                <textarea class="form-control" name="description" id="" ng-model="property.description" rows="7" cols="40"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+
+
+                    <div class="buttons" style="margin-top: 20px;">
+                        <!-- button to submit form -->
+                        <button type="submit" class="btn btn-primary" ng-disabled="propertyForm.$invalid">Save property</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

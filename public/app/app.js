@@ -34,6 +34,10 @@ roomie.config(function($stateProvider, $urlRouterProvider) {
             url: '/completeProfile',
             templateUrl: 'views/newProfileView.html'
         })
+        .state('addProperty', {
+            url: '/addProperty',
+            templateUrl: 'views/newRentalUnit.html'
+        })
         .state('userProfile', {
             url: '/userProfile/{id}',
             templateUrl: 'views/profileView.html'

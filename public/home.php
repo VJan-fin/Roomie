@@ -68,6 +68,7 @@
                 <ul class="dropdown-menu" role="menu">
                     <li ng-show="currentUser.registration_status == 'complete'"><a href="{{ '#/userProfile/' + currentUser.id }}">My Profile</a></li>
                     <li ng-show="currentUser.registration_status != 'complete'"><a href="#/completeProfile">Complete Profile</a></li>
+                    <li><a href="#/addProperty">Add new property</a></li>
                     <li ng-click="logout()"><a href>Logout</a></li>
                 </ul>
             </li>

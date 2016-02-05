@@ -27,7 +27,7 @@ class RentalUnitController extends Controller
      */
     public function index()
     {
-        $rentalUnits = RentalUnit::with('User')->where('property_active', 1)->orderBy('created_at', 'desc')->paginate(2);
+        $rentalUnits = RentalUnit::with('User')->where('property_active', 1)->orderBy('created_at', 'desc')->paginate(5);
         return Response::json($rentalUnits);
     }
 
@@ -49,7 +49,10 @@ class RentalUnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $property = new RentalUnit();
+        $property->fill(Input::all());
+        $property->save();
+        return Response::json($property);
     }
 
     /**
