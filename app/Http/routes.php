@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/hello', function () {
-    return "hello";
-});
-
 Route::model('User', 'App\User');
 Route::model('PersonalProfile', 'App\PersonalProfile');
 Route::model('RoommateProfile', 'App\RoommateProfile');
@@ -26,7 +22,6 @@ Route::model('RentalUnit', 'App\RentalUnit');
 Route::model('Comment', 'App\Comment');
 
 // API ROUTES ==================================
-// TODO: Enable only the necessary API functions. Create and edit are not needed since Angular handles the views
 Route::group(array('prefix' => 'api'), function() {
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
